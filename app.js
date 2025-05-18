@@ -2,8 +2,8 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import dbconnect from './configs/database.js'
-
 import authRoute from './routes/auth.js'
+
 
 const policy = {
     origin: [
@@ -15,12 +15,18 @@ const policy = {
 
 dbconnect(); // invoke the database connection
 
-const app = express()
-app.use(express.json())
-app.use(cors(policy))
+const app = express();
+
+app.use(cors(policy));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Registered routes
-app.use('/auth', authRoute)
+app.use('/api', [
+    authRoute,
+]);
 
 // Listener
-app.listen(process.env.APP_PORT, () => console.log('✅ Server started'))
+app.listen(process.env.APP_PORT, () => {
+    console.log('✅ Server started')
+});

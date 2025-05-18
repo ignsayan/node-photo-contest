@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const schema = new mongoose.Schema({
     first_name: {
@@ -31,15 +31,15 @@ const schema = new mongoose.Schema({
     timestamps: true,
     versionKey: false,
     toJSON: {
-        transform: (doc, ret) => {
-            delete ret.password;
-            return ret;
+        transform: (doc, rec) => {
+            delete rec.password;
+            return rec;
         }
     },
     toObject: {
-        transform: (doc, ret) => {
-            delete ret.password;
-            return ret;
+        transform: (doc, rec) => {
+            delete rec.password;
+            return rec;
         }
     }
 })

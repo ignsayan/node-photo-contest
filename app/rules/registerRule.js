@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body } from 'express-validator'
 
 const registerRule = [
 
@@ -14,7 +14,6 @@ const registerRule = [
 
     body('email')
         .trim()
-        .notEmpty().withMessage('Email is required')
         .isEmail().withMessage('Valid email is required')
         .normalizeEmail(),
 

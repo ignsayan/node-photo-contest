@@ -7,7 +7,7 @@ const loginAction = async (body) => {
     const { email, password } = body;
 
     const user = await User.findOne({ email }).exec();
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = user ? bcrypt.compare(password, user.password) : false;
 
     if (!user || !isPasswordValid) {
         const error = new Error('Invalid credentials');
