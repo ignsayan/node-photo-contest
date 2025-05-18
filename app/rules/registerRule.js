@@ -1,4 +1,5 @@
 import { body } from 'express-validator'
+import User from '../models/User.js'
 
 const registerRule = [
 
@@ -15,12 +16,25 @@ const registerRule = [
     body('email')
         .trim()
         .isEmail().withMessage('Valid email is required')
-        .normalizeEmail(),
+        .normalizeEmail()
+        .custom(async (value) => {
+            const existing = await User.findOne({ email: value });
+            if (existing) throw new Error('Email already exists');
+            return true;
+        }),
 
     body('phone')
         .trim()
         .optional({ checkFalsy: true })
-        .matches(/^[0-9]{10,15}$/).withMessage('Phone must be a valid number (10–15 digits)'),
+        .isNumeric().withMessage('Phone must be a number')
+        .isLength({ min: 10, max: 10 }).withMessage('Phone must be 10 digits')
+        .custom(async (value) => {
+            if (value) {
+                const existing = await User.findOne({ phone: value });
+                if (existing) throw new Error('Phone number already exists');
+            }
+            return true;
+        }),
 
     body('password')
         .notEmpty().withMessage('Password is required')

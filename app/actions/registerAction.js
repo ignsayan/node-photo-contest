@@ -4,23 +4,17 @@ import bcrypt from 'bcrypt'
 
 const registerAction = async (body) => {
 
-    const { first_name, last_name, email, phone, password } = body;
+    let { first_name, last_name, email, phone, password } = body;
 
-    const existing = await User.findOne({ email });
+    phone = phone && phone.trim() !== '' ? phone : null;
+    password = await bcrypt.hash(password, 10);
 
-    if (existing) {
-        const error = new Error('Email already exists');
-        error.status = 422;
-        throw error;
-    }
-
-    const hash = await bcrypt.hash(password, 10);
     const user = await User.create({
         first_name,
         last_name,
         email,
         phone,
-        password: hash,
+        password,
     });
 
     const role = await Role.findOneAndUpdate(
