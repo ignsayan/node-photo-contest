@@ -26,7 +26,14 @@ const schema = new mongoose.Schema({
         type: String,
         default: null,
     },
-
+    roles: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
+    }],
+    permissions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Permission'
+    }],
 }, {
     timestamps: true,
     versionKey: false,
@@ -42,7 +49,7 @@ const schema = new mongoose.Schema({
             return rec;
         }
     }
-})
+});
 
 schema.index({ phone: 1 }, { unique: true, sparse: true })
 

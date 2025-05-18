@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import Role from '../models/Role.js'
 import bcrypt from 'bcrypt'
 
 const registerAction = async (body) => {
@@ -21,6 +22,15 @@ const registerAction = async (body) => {
         phone,
         password: hash,
     });
+
+    const role = await Role.findOneAndUpdate(
+        { name: 'user' },
+        { name: 'user' },
+        { upsert: true, new: true }
+    );
+
+    user.roles.push(role._id);
+    await user.save();
 
     return user;
 };
