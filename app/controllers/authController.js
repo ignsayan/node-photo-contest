@@ -1,24 +1,20 @@
 import registerAction from '../actions/registerAction.js'
 import loginAction from '../actions/loginAction.js'
-import handler from '../utils/handler.js'
+import responseHandler from '../helpers/responseHandler.js'
 
 
-const register = handler(async (req) => {
+export const register = responseHandler(async (req) => {
     const user = await registerAction(req.body);
     return {
-        status: 201,
         message: 'User created successfully',
         data: { user }
     };
 });
 
-const login = handler(async (req) => {
-    const { token, user } = await loginAction(req.body);
+export const login = responseHandler(async (req) => {
+    const token = await loginAction(req.body);
     return {
-        status: 200,
         message: 'Login successful',
-        data: { user, token }
+        data: { token }
     };
 });
-
-export { register, login }

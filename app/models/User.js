@@ -16,7 +16,8 @@ const schema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        default: null,
+        sparse: true,
+        unique: null,
     },
     password: {
         type: String,
@@ -50,8 +51,6 @@ const schema = new mongoose.Schema({
         }
     }
 });
-
-schema.index({ phone: 1 }, { unique: true, sparse: true })
 
 const User = mongoose.model('User', schema)
 export default User

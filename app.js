@@ -2,8 +2,8 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import dbconnect from './configs/database.js'
-import authRoute from './routes/auth.js'
-
+import authRoute from './routes/authRoute.js'
+import userRoute from './routes/userRoute.js'
 
 const policy = {
     origin: [
@@ -24,6 +24,7 @@ app.use(express.json());
 // Registered routes
 app.use('/api', [
     authRoute,
+    userRoute,
 ]);
 
 // Listener

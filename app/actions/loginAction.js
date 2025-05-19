@@ -6,7 +6,7 @@ const loginAction = async (body) => {
 
     const { email, password } = body;
 
-    const user = await User.findOne({ email }).exec();
+    const user = await User.findOne({ email });
     const isPasswordValid = user ? bcrypt.compare(password, user.password) : false;
 
     if (!user || !isPasswordValid) {
@@ -18,10 +18,10 @@ const loginAction = async (body) => {
     const token = jwt.sign(
         { id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: '7d' }
+        { expiresIn: '1d' }
     );
 
-    return { token, user };
+    return token;
 };
 
 export default loginAction
