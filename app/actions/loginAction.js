@@ -6,7 +6,7 @@ const loginAction = async (body) => {
 
     const { email, password } = body;
 
-    const user = await User.findOne({ email }).populate('roles');
+    const user = await User.findOne({ email });
     const isPasswordValid = user ? bcrypt.compare(password, user.password) : false;
 
     if (!user || !isPasswordValid) {
