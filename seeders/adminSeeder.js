@@ -20,6 +20,9 @@ export default async function adminSeeder() {
         });
     }
 
+    // const roles = await Role.find(); // assign each roles
+    // user.roles = roles.map(role => role._id);
+
     const role = await Role.findOne({ name: 'admin' });
     user.roles = [role._id];
 
