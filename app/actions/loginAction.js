@@ -4,9 +4,15 @@ import jwt from 'jsonwebtoken'
 
 const loginAction = async (body) => {
 
-    const { email, password } = body;
+    const { email, username, password } = body;
+    const attribute = email ? email : username;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+        $or: [
+            { email: attribute },
+            { username: attribute }
+        ]
+    });
     const isPasswordValid = user ? bcrypt.compare(password, user.password) : false;
 
     if (!user || !isPasswordValid) {

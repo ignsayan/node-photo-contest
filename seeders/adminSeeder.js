@@ -10,8 +10,9 @@ export default async function adminSeeder() {
 
     if (!user) {
         user = await User.create({
-            first_name: 'Super',
-            last_name: 'Admin',
+            first_name: 'Chini',
+            last_name: 'Dey',
+            username: 'beingchinidey',
             email: 'ayandey166@gmail.com',
             phone: '9876543210',
             email_verified_at: new Date(),
