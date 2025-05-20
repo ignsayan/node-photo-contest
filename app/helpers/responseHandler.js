@@ -18,7 +18,7 @@ const responseHandler = (fn) => {
             if (!isValid) {
                 throw {
                     status: 500,
-                    message: 'Controller did not return a valid response format (data, message)'
+                    message: 'Controller did not return a valid response object (message, data)'
                 };
             }
 

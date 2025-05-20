@@ -12,9 +12,9 @@ export const register = responseHandler(async (req) => {
 });
 
 export const login = responseHandler(async (req) => {
-    const token = await loginAction(req.body);
+    const { user, token } = await loginAction(req.body);
     return {
         message: 'Login successful',
-        data: { token }
+        data: { user, token }
     };
 });
