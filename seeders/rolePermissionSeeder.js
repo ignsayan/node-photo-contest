@@ -5,7 +5,7 @@ export default async function rolePermissionSeeder() {
     const data = [
         { name: 'admin' },
         { name: 'user' },
-        { name: 'visitor' },
+        { name: 'guest' },
     ];
 
     const roles = data.map(role => ({
