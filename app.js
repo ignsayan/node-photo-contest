@@ -13,7 +13,7 @@ const policy = {
     allowedHeaders: ['Content-Type', 'Authorization']
 }
 
-dbconnect(); // invoke the database connection
+await dbconnect(); // invoke the database connection
 
 const app = express();
 

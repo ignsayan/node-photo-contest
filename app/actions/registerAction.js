@@ -17,11 +17,7 @@ const registerAction = async (body) => {
         password,
     });
 
-    const role = await Role.findOneAndUpdate(
-        { name: 'user' },
-        { name: 'user' },
-        { upsert: true, new: true }
-    );
+    const role = await Role.findOne({ name: 'user' });
 
     user.roles.push(role._id);
     await user.save();

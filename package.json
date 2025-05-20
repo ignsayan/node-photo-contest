@@ -4,7 +4,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "serve": "nodemon app.js"
+    "serve": "nodemon app.js",
+    "seed": "node ./seeders/dbSeeder.js"
   },
   "author": "",
   "license": "ISC",

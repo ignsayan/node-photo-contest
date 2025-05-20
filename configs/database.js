@@ -1,4 +1,7 @@
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // Database credentials
 const username = process.env.DB_USERNAME
@@ -14,12 +17,7 @@ const uri = process.env.APP_ENVIRONMENT === 'local'
 const options = { serverApi: { version: '1', strict: true, deprecationErrors: true } }
 
 // Establish connection
-export default function dbconnect() {
-    mongoose
-        .connect(uri, options)
-        .then(() => console.log("✅ Database connected"))
-        .catch((error) => {
-            console.log(error.errorResponse)
-            process.exit(1)
-        })
+export default async function dbconnect() {
+    await mongoose.connect(uri, options);
+    console.log("✅ Database connected");
 }
