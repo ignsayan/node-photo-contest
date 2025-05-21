@@ -5,15 +5,15 @@ import jwt from 'jsonwebtoken'
 const loginAction = async (body) => {
 
     const { email, username, password } = body;
-    const attribute = email ? email : username;
 
     const user = await User.findOne({
         $or: [
-            { email: attribute },
-            { username: attribute }
-        ]
+            email ? { email } : null,
+            username ? { username } : null
+        ].filter(Boolean)
     });
-    const isPasswordValid = user ? bcrypt.compare(password, user.password) : false;
+
+    const isPasswordValid = user ? await bcrypt.compare(password, user.password) : false;
 
     if (!user || !isPasswordValid) {
         const error = new Error('Invalid credentials');
