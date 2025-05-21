@@ -5,18 +5,17 @@ const registerRule = [
 
     body('first_name')
         .trim()
-        .notEmpty().withMessage('First name is required')
-        .isAlpha().withMessage('First name must contain only letters'),
+        .notEmpty().withMessage('First name is required').bail()
+        .isAlpha().withMessage('First name must contain only letters').bail(),
 
     body('last_name')
         .trim()
-        .notEmpty().withMessage('Last name is required')
-        .isAlpha().withMessage('Last name must contain only letters'),
+        .notEmpty().withMessage('Last name is required').bail()
+        .isAlpha().withMessage('Last name must contain only letters').bail(),
 
     body('email')
-        .trim()
-        .isEmail().withMessage('Valid email is required')
         .normalizeEmail()
+        .isEmail().withMessage('Valid email is required').bail()
         .custom(async (value) => {
             const existing = await User.findOne({ email: value });
             if (existing) throw new Error('Email already exists');
@@ -26,24 +25,22 @@ const registerRule = [
     body('phone')
         .trim()
         .optional({ checkFalsy: true })
-        .isNumeric().withMessage('Phone must be a number')
-        .isLength({ min: 10, max: 10 }).withMessage('Phone must be 10 digits')
+        .isNumeric().withMessage('Phone must be a number').bail()
+        .isLength({ min: 10, max: 10 }).withMessage('Phone must be 10 digits').bail()
         .custom(async (value) => {
-            if (value) {
-                const existing = await User.findOne({ phone: value });
-                if (existing) throw new Error('Phone number already exists');
-            }
+            const existing = await User.findOne({ phone: value });
+            if (existing) throw new Error('Phone number already exists');
             return true;
         }),
 
     body('password')
-        .notEmpty().withMessage('Password is required')
-        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+        .notEmpty().withMessage('Password is required').bail()
+        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters').bail(),
 
     body('password_confirmation')
-        .notEmpty().withMessage('Confirm password is required')
+        .notEmpty().withMessage('Confirm password is required').bail()
         .custom((value, { req }) => value === req.body.password)
-        .withMessage('Password confirmation must match'),
+        .withMessage('Password confirmation must match').bail(),
 ];
 
 export default registerRule
