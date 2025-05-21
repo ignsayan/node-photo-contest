@@ -2,9 +2,14 @@ import { body } from 'express-validator'
 
 const loginRule = [
     body('email')
-        .optional({ checkFalsy: true })
         .isEmail().withMessage('Valid email is required')
-        .normalizeEmail(),
+        .normalizeEmail()
+        .custom(async (value, { req }) => {
+            if (!value && !req.body.username) {
+                throw new Error('Email is required');
+            }
+            return true;
+        }),
 
     body('username')
         .optional({ checkFalsy: true })
