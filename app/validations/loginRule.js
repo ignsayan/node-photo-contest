@@ -1,21 +1,26 @@
 import { body } from 'express-validator'
 
 const loginRule = [
+
+    body('general').custom(async (value, { req }) => {
+        if (!req.body.email && !req.body.username) {
+            throw new Error('Email or username is required');
+        }
+        if (req.body.username && req.body.email) {
+            throw new Error('Email and username cannot be present at the same time')
+        }
+        return true;
+    }),
+
     body('email')
-        .if(body('username').not().exists())
-        .notEmpty().withMessage('Email is required').bail()
+        .optional({ checkFalsy: true })
         .isEmail().withMessage('Invalid email format').bail()
         .normalizeEmail(),
 
     body('username')
         .optional({ checkFalsy: true })
-        .matches(/^[a-zA-Z0-9]+$/).withMessage('Username can only be alphanumeric').bail()
-        .custom(async (value, { req }) => {
-            if (value && req.body.email) {
-                throw new Error('Email and username cannot be present at the same time')
-            }
-            return true;
-        }),
+        .matches(/^[a-zA-Z0-9]+$/)
+        .withMessage('Username can only be alphanumeric').bail(),
 
     body('password')
         .notEmpty().withMessage('Password is required').bail(),
