@@ -1,8 +1,8 @@
-import User from '../models/User.js'
+import User from '../../models/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const loginAction = async (body) => {
+const action = async (body) => {
 
     const { email, username, password } = body;
 
@@ -30,4 +30,4 @@ const loginAction = async (body) => {
     return { user, token };
 };
 
-export default loginAction
+export default action

@@ -1,8 +1,8 @@
-import User from '../models/User.js'
-import Role from '../models/Role.js'
+import User from '../../models/User.js'
+import Role from '../../models/Role.js'
 import bcrypt from 'bcrypt'
 
-const registerAction = async (body) => {
+const action = async (body) => {
 
     let { first_name, last_name, email, phone, password } = body;
 
@@ -28,4 +28,4 @@ const registerAction = async (body) => {
     return user;
 };
 
-export default registerAction
+export default action

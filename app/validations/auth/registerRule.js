@@ -1,7 +1,7 @@
 import { body } from 'express-validator'
-import User from '../models/User.js'
+import User from '../../models/User.js'
 
-const registerRule = [
+const rule = [
 
     body('first_name')
         .trim()
@@ -43,4 +43,4 @@ const registerRule = [
         .withMessage('Password confirmation must match').bail(),
 ];
 
-export default registerRule
+export default rule

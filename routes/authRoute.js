@@ -4,16 +4,19 @@ import throttle from '../app/middlewares/throttle.js'
 import {
     register,
     login,
-} from '../app/controllers/authController.js'
+} from '../app/controllers/auth/authController.js'
 
-import registerRule from '../app/validations/registerRule.js'
-import loginRule from '../app/validations/loginRule.js'
+// validation rules
+import registerRule from '../app/validations/auth/registerRule.js'
+import loginRule from '../app/validations/auth/loginRule.js'
 
 
 const route = express.Router()
 
-route.use(throttle(5, 20)); // applying rate limiter
+// registered middlewares
+route.use(throttle(5, 20));
 
+// registered routes
 route.post('/register', validateRules(registerRule, register));
 route.post('/login', validateRules(loginRule, login));
 

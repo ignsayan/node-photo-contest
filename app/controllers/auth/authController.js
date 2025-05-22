@@ -1,6 +1,6 @@
-import registerAction from '../actions/registerAction.js'
-import loginAction from '../actions/loginAction.js'
-import responseHandler from '../helpers/responseHandler.js'
+import responseHandler from '../../helpers/responseHandler.js'
+import registerAction from '../../actions/auth/registerAction.js'
+import loginAction from '../../actions/auth/loginAction.js'
 
 
 export const register = responseHandler(async (req) => {

@@ -1,6 +1,6 @@
 import { body } from 'express-validator'
 
-const loginRule = [
+const rule = [
 
     body('general').custom(async (value, { req }) => {
         if (!req.body.email && !req.body.username) {
@@ -26,4 +26,4 @@ const loginRule = [
         .notEmpty().withMessage('Password is required').bail(),
 ];
 
-export default loginRule
+export default rule
