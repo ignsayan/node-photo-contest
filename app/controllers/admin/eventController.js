@@ -1,9 +1,12 @@
 import responseHandler from '../../helpers/responseHandler.js'
+import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
 import updateEventAction from '../../actions/admin/updateEventAction.js'
 
 
 export const listEvents = responseHandler(async (req) => {
+    const events = await Event.find({});
+    return { data: { events } };
 });
 
 export const createEvent = responseHandler(async (req) => {
@@ -15,7 +18,8 @@ export const createEvent = responseHandler(async (req) => {
 });
 
 export const getEvent = responseHandler(async (req) => {
-    //
+    const event = await Event.findById(req.params.id);
+    return { data: { event } };
 });
 
 export const updateEvent = responseHandler(async (req) => {

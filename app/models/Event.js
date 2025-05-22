@@ -1,12 +1,18 @@
 import mongoose from 'mongoose'
+import User from './User.js'
 import Category from './Category.js'
 import slugify from 'slugify'
 
 const schema = new mongoose.Schema({
+    creator_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User,
+        required: true,
+        index: true,
+    },
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     slug: {
         type: String,
@@ -48,14 +54,13 @@ const schema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: true,
-    },
-    
+    }
 }, {
     timestamps: true,
     versionKey: false,
 });
 
-schema.pre('save', function (next) {
+schema.pre('validate', function (next) {
     this.slug = slugify(this.title, { lower: true });
     next();
 });

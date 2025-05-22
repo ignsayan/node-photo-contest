@@ -14,7 +14,7 @@ import loginRule from '../app/validations/auth/loginRule.js'
 const route = express.Router()
 
 // registered middlewares
-route.use(throttle(5, 20));
+route.use(throttle(30, 60));
 
 // registered routes
 route.post('/register', validateRules(registerRule, register));

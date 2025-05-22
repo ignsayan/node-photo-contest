@@ -8,7 +8,7 @@ import { profile } from '../app/controllers/userController.js'
 const route = express.Router()
 
 // registered middlewares
-route.use(throttle(60, 60));
+route.use(throttle(30, 60));
 route.use(isAuthenticated, hasRole('admin', 'user'));
 
 // registered routes

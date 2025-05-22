@@ -34,11 +34,13 @@ const schema = new mongoose.Schema({
     },
     email: {
         type: String,
+        index: true,
         required: true,
         unique: true,
     },
     phone: {
         type: String,
+        index: true,
         sparse: true,
         unique: null,
     },

@@ -5,7 +5,6 @@ const schema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     slug: {
         type: String,
@@ -18,13 +17,13 @@ const schema = new mongoose.Schema({
     description: {
         type: String,
         default: null,
-    },
+    }
 }, {
     timestamps: true,
     versionKey: false,
 });
 
-schema.pre('save', function (next) {
+schema.pre('validate', function (next) {
     this.slug = slugify(this.name, { lower: true });
     next();
 });
