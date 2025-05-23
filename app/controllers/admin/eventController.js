@@ -5,7 +5,7 @@ import updateEventAction from '../../actions/admin/updateEventAction.js'
 
 
 export const listEvents = responseHandler(async (req) => {
-    const events = await Event.find({});
+    const events = await Event.find({}).populate('banner');
     return { data: { events } };
 });
 

@@ -3,6 +3,11 @@ import User from './User.js'
 import Category from './Category.js'
 import slugify from 'slugify'
 
+const transform = (doc, rec) => {
+    delete rec.id;
+    return rec;
+};
+
 const schema = new mongoose.Schema({
     creator_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -59,6 +64,25 @@ const schema = new mongoose.Schema({
     timestamps: true,
     versionKey: false,
 });
+
+schema.virtual('banner', {
+    ref: 'Image',
+    localField: '_id',
+    foreignField: 'ref_id',
+    justOne: true,
+    options: { match: { ref_model: 'Event', type: 'banner' } }
+});
+
+schema.virtual('user_uploads', {
+    ref: 'Image',
+    localField: '_id',
+    foreignField: 'ref_id',
+    justOne: false,
+    options: { match: { ref_model: 'Event', type: 'user_upload' } }
+});
+
+schema.set('toObject', { virtuals: true, transform });
+schema.set('toJSON', { virtuals: true, transform });
 
 schema.pre('validate', function (next) {
     this.slug = slugify(this.title, { lower: true });
