@@ -10,6 +10,10 @@ import {
     listEvents,
     updateEvent
 } from '../app/controllers/admin/eventController.js'
+import {
+    getCategory,
+    listCategories,
+} from '../app/controllers/admin/categoryController.js'
 
 // validation rules
 import createEventRule from '../app/validations/admin/createEventRule.js'
@@ -28,5 +32,9 @@ route.post('/event/create', validateRules(createEventRule, createEvent));
 route.get('/event/:id', getEvent);
 route.put('/event/:id', validateRules(updateEventRule, updateEvent));
 route.delete('/event/:id', deleteEvent);
+
+route.get('/category/list', listCategories);
+route.get('/category/:id', getCategory);
+
 
 export default route

@@ -16,7 +16,7 @@ const isAuthenticated = (req, res, next) => {
 
     } catch (error) {
         const message = error.message || new Error('Authorization failed');
-        return res.status(403).json({ errors: message });
+        return res.status(401).json({ errors: message });
     }
 };
 
