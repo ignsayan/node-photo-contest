@@ -24,7 +24,7 @@ const action = async (body) => {
     const token = jwt.sign(
         { id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '1h' }
     );
 
     return { user, token };
