@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import User from './User'
+import User from './User.js'
 
 const schema = new mongoose.Schema({
     ref_id: {

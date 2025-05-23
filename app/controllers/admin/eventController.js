@@ -10,7 +10,7 @@ export const listEvents = responseHandler(async (req) => {
 });
 
 export const createEvent = responseHandler(async (req) => {
-    const event = await createEventAction(req.body);
+    const event = await createEventAction(req);
     return {
         message: 'Event created successfully',
         data: { event }

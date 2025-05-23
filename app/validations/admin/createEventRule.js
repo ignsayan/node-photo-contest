@@ -1,4 +1,4 @@
-import { body } from 'express-validator'
+import { body, check } from 'express-validator'
 import Event from '../../models/Event.js'
 import User from '../../models/User.js'
 import slugify from 'slugify'
@@ -81,6 +81,22 @@ const rule = [
         .trim()
         .optional({ checkFalsy: true })
         .isBoolean().withMessage('Visibility must be a boolean').bail(),
+
+    check('banner').custom((_, { req }) => {
+
+        const file = req.files?.find(f => f.fieldname === 'banner');
+        if (!file) throw new Error('Banner is required');
+
+        const mimes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!mimes.includes(file.mimetype)) {
+            throw new Error('Only jpg, jpeg, and png files are allowed');
+        }
+        const limit = 500 * 1024;
+        if (file.size > limit) {
+            throw new Error(`Image must be less than 500 KB`);
+        }
+        return true;
+    }),
 ];
 
 export default rule
