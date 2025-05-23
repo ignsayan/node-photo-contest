@@ -5,8 +5,17 @@ import updateEventAction from '../../actions/admin/updateEventAction.js'
 
 
 export const listEvents = responseHandler(async (req) => {
-    const events = await Event.find({}).populate('banner');
-    return { data: { events } };
+    const { search, page, limit } = req.query;
+
+    const query = search ? { slug: new RegExp(search, 'i') } : {};
+    const options = {
+        page: page ? parseInt(page) : 1,
+        limit: limit ? parseInt(limit) : 10,
+        sort: { createdAt: -1 },
+        populate: 'banner'
+    }
+    const events = await Event.paginate(query, options);
+    return { data: events };
 });
 
 export const createEvent = responseHandler(async (req) => {

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import User from './User.js'
 import Category from './Category.js'
 import slugify from 'slugify'
@@ -57,8 +58,9 @@ const schema = new mongoose.Schema({
         default: true,
     },
     status: {
-        type: Boolean,
-        default: true,
+        type: String,
+        enum: ['active', 'nominated', 'voting', 'ended'],
+        default: 'active',
     }
 }, {
     timestamps: true,
@@ -88,6 +90,8 @@ schema.pre('validate', function (next) {
     this.slug = slugify(this.title, { lower: true });
     next();
 });
+
+schema.plugin(mongoosePaginate);
 
 const Event = mongoose.model('Event', schema);
 export default Event

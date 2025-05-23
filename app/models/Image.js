@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import User from './User.js'
 
 const schema = new mongoose.Schema({
@@ -13,6 +14,7 @@ const schema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
+        index: true,
     },
     uploaded_by: {
         type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +33,8 @@ const schema = new mongoose.Schema({
     timestamps: true,
     versionKey: false,
 });
+
+schema.plugin(mongoosePaginate);
 
 const Image = mongoose.model('Image', schema);
 export default Image

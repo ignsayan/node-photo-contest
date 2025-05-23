@@ -82,6 +82,11 @@ const rule = [
         .optional({ checkFalsy: true })
         .isBoolean().withMessage('Visibility must be a boolean').bail(),
 
+    body('status')
+        .optional({ checkFalsy: true })
+        .isIn(['active', 'nominated', 'voting', 'ended'])
+        .withMessage('Status type must be in [active, nominated, voting, or ended]').bail(),
+
     check('banner').custom((_, { req }) => {
 
         const file = req.files?.find(f => f.fieldname === 'banner');

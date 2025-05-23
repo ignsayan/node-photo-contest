@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import slugify from 'slugify'
 
 const schema = new mongoose.Schema({
@@ -27,6 +28,8 @@ schema.pre('validate', function (next) {
     this.slug = slugify(this.name, { lower: true });
     next();
 });
+
+schema.plugin(mongoosePaginate);
 
 const Category = mongoose.model('Category', schema);
 export default Category

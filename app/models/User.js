@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import Permission from './Permission.js'
 import Role from './Role.js'
 
@@ -80,6 +81,8 @@ schema.pre(/^find/, function () {
     this.populate('roles', 'name -_id')
         .populate('permissions', 'name -_id');
 });
+
+schema.plugin(mongoosePaginate);
 
 const User = mongoose.model('User', schema)
 export default User
