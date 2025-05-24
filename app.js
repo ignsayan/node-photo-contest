@@ -8,6 +8,7 @@ import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
 
+
 await dbconnect(); // connect to database
 
 const app = express();

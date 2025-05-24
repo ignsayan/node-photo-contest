@@ -1,17 +1,29 @@
-export default function template(link) {
+export default function template(data) {
+
+    let { name, link, time } = data;
+    
+    time = Math.ceil((time - Date.now()) / 1000 / 60);
 
     return (
-        `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; background: #f9f9f9; border-radius: 10px;">
-            <h2 style="color: #333;">Reset Your Password</h2>
+        `<div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+            <h2 style="color: #333;">Hey, ${name}</h2>
             <p style="font-size: 16px; color: #555;">
-            Hello, you requested to reset your password. Click the button below to proceed:
+                You have recently requested to reset your password.
             </p>
-            <a href="${link}" style="display: inline-block; padding: 12px 20px; margin: 20px 0; background-color: #007BFF; color: #fff; text-decoration: none; border-radius: 5px;">
-            Reset Password
-            </a>
+            <p style="font-size: 16px; color: #555;">
+                Click the button below to proceed.
+            </p>
+            <div style="text-align: center;">
+                <a href="${link}" style="display: inline-block; padding: 12px 20px; margin: 20px 0; background-color: rgb(50, 50, 50); color: #fff; text-decoration: none; border-radius: 30px;">
+                Reset Password
+                </a>
+            </div>
             <p style="font-size: 14px; color: #999;">
-            If you didn’t request this, you can ignore this email.
+                This link will expire in ${time} minutes.
+            </p>
+            <p style="font-size: 14px; color: #999;">
+                If you didn’t request this, you can ignore this email.
             </p>
         </div>`
     );
-};
+}
