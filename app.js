@@ -1,25 +1,19 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config();
+
 import express from 'express'
-import cors from 'cors'
+import corspolicy from './configs/corspolicy.js'
 import dbconnect from './configs/database.js'
 import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
-
-const policy = {
-    origin: [
-        process.env.FRONTEND_URL,
-    ],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}
 
 await dbconnect(); // connect to database
 
 const app = express();
 
 // registered middlewares
-app.use(cors(policy));
+app.use(corspolicy);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
