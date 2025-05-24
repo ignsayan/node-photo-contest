@@ -19,8 +19,7 @@ const action = async (body) => {
     });
 
     if (user && passwordReset) {
-        const route = '/reset-password';
-        const link = `${process.env.FRONTEND_URL}/${route}?token=${token}&email=${email}`
+        const link = `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`
 
         const data = {
             name: user.first_name,
