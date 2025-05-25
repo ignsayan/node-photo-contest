@@ -25,8 +25,8 @@ app.use('/api', [
 ]);
 
 // in app view templates
-// app.set('view engine', 'ejs');
-// app.get('/', (req, res) => res.render('index'));
+app.set('view engine', 'ejs');
+app.get('/', (req, res) => res.render('index'));
 
 // start the server
 app.listen(process.env.APP_PORT, () => {
