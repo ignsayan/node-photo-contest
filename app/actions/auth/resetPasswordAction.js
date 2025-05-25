@@ -5,7 +5,7 @@ import User from '../../models/User.js'
 
 const action = async (body) => {
     
-    const { token, email, password } = body;
+    let { token, email, password } = body;
 
     // 1. find the user by email
     const user = await User.findOne({ email });
@@ -33,11 +33,13 @@ const action = async (body) => {
     // 6. delete reset token
     await PasswordReset.deleteOne({ _id: passwordReset._id });
 
-    return jwt.sign(
+    token = jwt.sign(
         { id: user._id },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
     );
+
+    return { user, token };
 };
 
 export default action

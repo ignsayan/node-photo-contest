@@ -11,9 +11,9 @@ export const forgotPassword = responseHandler(async (req) => {
 });
 
 export const resetPassword = responseHandler(async (req) => {
-    const token = await resetPasswordAction(req.body);
+    const { user, token } = await resetPasswordAction(req.body);
     return {
         message: 'Password reset successfully',
-        data: { token }
+        data: { user, token }
     };
 });
