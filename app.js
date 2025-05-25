@@ -26,7 +26,7 @@ app.use('/api', [
 
 // in app view templates
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', './app/views');
 app.get('/', (req, res) => res.render('index'));
 
 // start the server
