@@ -8,7 +8,6 @@ import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
 
-
 await dbconnect(); // connect to database
 
 const app = express();
@@ -27,6 +26,7 @@ app.use('/api', [
 
 // in app view templates
 app.set('view engine', 'ejs');
+app.set('views', './views');
 app.get('/', (req, res) => res.render('index'));
 
 // start the server
