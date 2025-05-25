@@ -2,8 +2,9 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 import express from 'express'
-import corspolicy from './configs/corspolicy.js'
 import dbconnect from './configs/database.js'
+import corspolicy from './configs/corspolicy.js'
+import homePage from './emails/homePage.js'
 import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
@@ -25,8 +26,8 @@ app.use('/api', [
 ]);
 
 // in app view templates
-app.set('view engine', 'ejs');
-app.get('/', (req, res) => res.render('index'));
+// app.set('view engine', 'ejs');
+app.get('/', homePage);
 
 // start the server
 app.listen(process.env.APP_PORT, () => {
