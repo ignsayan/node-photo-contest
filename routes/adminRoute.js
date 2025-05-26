@@ -1,8 +1,7 @@
-import express from 'express'
+import { router, throttle } from '../app/middlewares/throttledRoutes.js'
 import validateRules from '../app/middlewares/validateRules.js'
 import isAuthenticated from '../app/middlewares/isAuthenticated.js'
 import hasRole from '../app/middlewares/hasRole.js'
-import throttle from '../app/middlewares/throttle.js'
 import {
     createEvent,
     deleteEvent,
@@ -19,11 +18,10 @@ import {
 import createEventRule from '../app/validations/admin/createEventRule.js'
 import updateEventRule from '../app/validations/admin/updateEventRule.js'
 
-
-const route = express.Router()
+const route = router();
 
 // registered middlewares
-route.use(throttle(30, 60));
+route.use(throttle(60, 60));
 route.use(isAuthenticated, hasRole('admin'));
 
 // registered routes

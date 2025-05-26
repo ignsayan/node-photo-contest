@@ -1,14 +1,15 @@
-import express from 'express'
+import { router, throttle } from '../app/middlewares/throttledRoutes.js'
+import validateRules from '../app/middlewares/validateRules.js'
 import isAuthenticated from '../app/middlewares/isAuthenticated.js'
 import hasRole from '../app/middlewares/hasRole.js'
-import throttle from '../app/middlewares/throttle.js'
-import { profile } from '../app/controllers/userController.js'
+import {
+    profile
+} from '../app/controllers/userController.js'
 
-
-const route = express.Router()
+const route = router();
 
 // registered middlewares
-route.use(throttle(30, 60));
+route.use(throttle(10, 30));
 route.use(isAuthenticated, hasRole('admin', 'user'));
 
 // registered routes

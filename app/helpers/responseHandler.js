@@ -1,4 +1,5 @@
 const responseHandler = (fn) => {
+
     return async (req, res) => {
         try {
             const proxy = new Proxy(res, {
@@ -37,4 +38,4 @@ const responseHandler = (fn) => {
     };
 };
 
-export default responseHandler;
+export default responseHandler

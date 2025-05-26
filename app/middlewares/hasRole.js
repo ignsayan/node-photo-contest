@@ -1,6 +1,7 @@
 import User from '../models/User.js'
 
 const hasRole = (...allowedRoles) => {
+    
     return async (req, res, next) => {
 
         try {
@@ -21,4 +22,4 @@ const hasRole = (...allowedRoles) => {
     };
 };
 
-export default hasRole;
+export default hasRole

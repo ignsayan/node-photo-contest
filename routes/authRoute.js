@@ -1,6 +1,5 @@
-import express from 'express'
+import { router, throttle } from '../app/middlewares/throttledRoutes.js'
 import validateRules from '../app/middlewares/validateRules.js'
-import throttle from '../app/middlewares/throttle.js'
 import {
     register,
     login,
@@ -16,11 +15,10 @@ import loginRule from '../app/validations/auth/loginRule.js'
 import forgotPasswordRule from '../app/validations/auth/forgotPasswordRule.js'
 import resetPasswordRule from '../app/validations/auth/resetPasswordRule.js'
 
-
-const route = express.Router()
+const route = router();
 
 // registered middlewares
-route.use(throttle(100, 60));
+route.use(throttle(5, 60));
 
 // registered routes
 route.post('/register', validateRules(registerRule, register));

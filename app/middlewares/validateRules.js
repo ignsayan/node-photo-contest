@@ -35,4 +35,4 @@ const validateRules = (rules, controller) => {
     ];
 };
 
-export default validateRules;
+export default validateRules
