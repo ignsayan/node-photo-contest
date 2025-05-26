@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
-import User from './User.js'
 
 const schema = new mongoose.Schema({
     ref_id: {
@@ -18,7 +17,7 @@ const schema = new mongoose.Schema({
     },
     uploaded_by: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: User,
+        ref: 'User',
         default: null,
     },
     url: {

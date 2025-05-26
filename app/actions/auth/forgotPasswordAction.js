@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 import PasswordReset from '../../models/PasswordReset.js'
-import template from '../../../emails/forgotPasswordEmail.js'
+import template from '../../../emails/resetPasswordEmail.js'
 import transporter from '../../../configs/nodemailer.js'
 
 const action = async (body) => {
@@ -11,31 +11,35 @@ const action = async (body) => {
     const token = crypto.randomBytes(32).toString('hex');
     const hashedToken = await bcrypt.hash(token, 10);
 
-    await PasswordReset.deleteMany({ user: user._id });
-    const passwordReset = await PasswordReset.create({
-        user: user._id,
-        token: hashedToken,
-        expiry: Date.now() + 10 * 60 * 1000,
-    });
+    const passwordReset = await PasswordReset.findOneAndUpdate(
+        { user: user._id },
+        {
+            token: hashedToken,
+            expiry: new Date(Date.now() + 10 * 60 * 1000)
+        },
+        {
+            upsert: true,
+            new: true,
+            setDefaultsOnInsert: true
+        }
+    );
 
-    if (user && passwordReset) {
-        const link = `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`
-
-        const data = {
-            name: user.first_name,
-            link,
-            time: passwordReset.expiry
-        };
-
-        await transporter.sendMail({
-            from: process.env.EMAIL,
-            to: email,
-            subject: 'Password Reset',
-            html: template(data),
-        });
+    if (!user && !passwordReset) {
+        throw new Error('Something went wrong');
     }
 
-    return;
+    const data = {
+        name: user.first_name,
+        link: `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`,
+        time: passwordReset.expiry
+    };
+
+    await transporter.sendMail({
+        from: process.env.MAIL_FROM,
+        to: email,
+        subject: 'Password Reset',
+        html: template(data),
+    });
 };
 
 export default action

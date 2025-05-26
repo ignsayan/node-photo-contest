@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 import Permission from './Permission.js'
 import Role from './Role.js'
+import emailVerification from './plugins/emailVerification.js'
+import phoneVerification from './plugins/phoneVerification.js'
 
 const transform = (doc, rec) => {
     delete rec.password;
@@ -83,6 +85,8 @@ schema.pre(/^find/, function () {
 });
 
 schema.plugin(mongoosePaginate);
+schema.plugin(emailVerification);
+schema.plugin(phoneVerification);
 
 const User = mongoose.model('User', schema)
 export default User

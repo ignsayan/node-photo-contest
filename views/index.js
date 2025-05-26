@@ -1,4 +1,4 @@
-export default function homePage(req, res) {
+export default function index(req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.send(`
     <!DOCTYPE html>

@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
-import User from './User.js'
-import Category from './Category.js'
 import slugify from 'slugify'
 
 const transform = (doc, rec) => {
@@ -12,7 +10,7 @@ const transform = (doc, rec) => {
 const schema = new mongoose.Schema({
     creator_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: User,
+        ref: 'User',
         required: true,
         index: true,
     },
@@ -38,7 +36,7 @@ const schema = new mongoose.Schema({
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: Category,
+        ref: 'Category',
         required: true,
     },
     rules: {

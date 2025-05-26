@@ -7,20 +7,26 @@ const schema = new mongoose.Schema({
         required: true,
         index: true,
     },
-    token: {
+    channel: {
         type: String,
         required: true,
+        index: true,
+    },
+    code: {
+        type: Number,
+        required: true,
+        index: true,
     },
     expiry: {
         type: Date,
         required: true,
         expires: 0,
-    }
+    },
 }, {
-    collection: 'password_resets',
+    collection: 'otps',
     timestamps: true,
-    versionKey: false,
+    versionKey: false
 });
 
-const PasswordReset = mongoose.model('PasswordReset', schema);
-export default PasswordReset
+const OTP = mongoose.model('OTP', schema);
+export default OTP
