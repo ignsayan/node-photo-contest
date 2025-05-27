@@ -12,7 +12,7 @@ const isAuthenticated = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
-        next();
+        return next();
 
     } catch (error) {
         const message = error.message || new Error('Authorization failed');

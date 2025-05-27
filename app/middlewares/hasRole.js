@@ -11,9 +11,9 @@ const hasRole = (...allowedRoles) => {
 
             const access = allowedRoles.some(role => givenRoles.includes(role));
             if (!access) {
-                return res.status(403).json({ errors: 'User does not have the required role' });
+                return res.status(403).json({ errors: 'You do not have the required roles' });
             }
-            next();
+            return next();
 
         } catch (error) {
             const message = error.message || new Error('Role verification failed');

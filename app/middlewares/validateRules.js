@@ -13,7 +13,7 @@ const validateRules = (rules, controller) => {
                 if (req.files && req.files.length > 0) {
                     req.body.files = req.files;
                 }
-                next();
+                return next();
             });
         },
 
@@ -31,7 +31,7 @@ const validateRules = (rules, controller) => {
                 });
                 return res.status(422).json({ errors: formattedErrors });
             }
-            next();
+            return next();
         },
 
         controller,
