@@ -1,8 +1,7 @@
 import slugify from 'slugify'
 import Category from '../../models/Category.js'
 import Event from '../../models/Event.js'
-import uploader from '../../../configs/cloudinary.js'
-import Image from '../../models/Image.js'
+import mediaUploader from '../../helpers/mediaUploader.js'
 
 const action = async ({ body, files }) => {
 
@@ -15,19 +14,19 @@ const action = async ({ body, files }) => {
 
     body.category = category._id;
     body.visibility = [0, '0', false, 'false'].includes(visibility) ? false : true;
+    body.user = body.creator_id;
 
     const event = await Event.create(body);
 
     if (event && files.length > 0) {
 
-        const file = await uploader(files[0].buffer, 'banners');
-        await Image.create({
-            ref_id: event._id,
-            ref_model: Event.modelName,
+        await mediaUploader({
+            buffer: files[0].buffer,
+            refId: event._id,
+            refModel: Event.modelName,
             type: 'banner',
-            uploaded_by: event.creator_id,
-            url: file.secure_url,
-        })
+            user: event.user,
+        });
     }
 
     return event;

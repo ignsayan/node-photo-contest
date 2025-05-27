@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
         required: true,
         index: true,
     },
-    uploaded_by: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         default: null,
