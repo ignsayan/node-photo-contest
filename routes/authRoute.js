@@ -1,5 +1,4 @@
 import { router, throttle } from '../app/middlewares/throttledRoutes.js'
-import validateRules from '../app/middlewares/validateRules.js'
 import {
     register,
     login,
@@ -13,8 +12,8 @@ import {
     sendOtp,
 } from '../app/controllers/auth/verifyController.js'
 
-
 // validation rules
+import validateRules from '../app/middlewares/validateRules.js'
 import registerRule from '../app/validations/auth/registerRule.js'
 import loginRule from '../app/validations/auth/loginRule.js'
 import forgotPasswordRule from '../app/validations/auth/forgotPasswordRule.js'
@@ -22,19 +21,32 @@ import resetPasswordRule from '../app/validations/auth/resetPasswordRule.js'
 import sendOtpRule from '../app/validations/auth/sendOtpRule.js'
 import verifyOtpRule from '../app/validations/auth/verifyOtpRule.js'
 
+
 const route = router();
 
-// registered middlewares
-route.use(throttle(5, 60));
-
 // registered routes
-route.post('/register', validateRules(registerRule, register));
-route.post('/login', validateRules(loginRule, login));
-
-route.post('/forgot-password', validateRules(forgotPasswordRule, forgotPassword));
-route.post('/reset-password', validateRules(resetPasswordRule, resetPassword));
-
-route.post('/send-otp', validateRules(sendOtpRule, sendOtp));
-route.post('/verify-otp', validateRules(verifyOtpRule, verifyOtp));
+route.post('/register',
+    throttle(10, 30),
+    validateRules(registerRule, register)
+);
+route.post('/login',
+    throttle(5, 60),
+    validateRules(loginRule, login)
+);
+route.post('/forgot-password',
+    throttle(5, 30),
+    validateRules(forgotPasswordRule, forgotPassword)
+);
+route.post('/reset-password',
+    validateRules(resetPasswordRule, resetPassword)
+);
+route.post('/send-otp',
+    throttle(5, 30),
+    validateRules(sendOtpRule, sendOtp)
+);
+route.post('/verify-otp',
+    throttle(5, 30),
+    validateRules(verifyOtpRule, verifyOtp)
+);
 
 export default route

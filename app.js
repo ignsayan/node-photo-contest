@@ -1,31 +1,38 @@
-import dotenv from 'dotenv'
-dotenv.config();
-
 import express from 'express'
+import dotenv from 'dotenv'
 import dbconnect from './configs/database.js'
 import corspolicy from './configs/corspolicy.js'
 import index from './views/index.js'
+import isAuthenticated from './app/middlewares/isAuthenticated.js'
+import hasRole from './app/middlewares/hasRole.js'
 import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
 
-await dbconnect(); // connect to database
+dotenv.config();
+await dbconnect();
 
 const app = express();
 
-// registered middlewares
+app.get('/', index); // root index
 app.use(corspolicy);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// registered routes
-app.use('/api', [
-    authRoute,
-    adminRoute,
-    userRoute,
-]);
+// guest routes
+app.use('/api/auth', authRoute);
 
-app.get('/', index); // root index
+// authenticated routes
+app.use(isAuthenticated);
+
+app.use('/api/admin',
+    hasRole('admin'),
+    adminRoute
+);
+app.use('/api/user',
+    hasRole('admin', 'user'),
+    userRoute
+);
 
 // start the server
 app.listen(process.env.APP_PORT, () => {

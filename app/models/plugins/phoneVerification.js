@@ -5,7 +5,7 @@ const phoneVerification = (schema) => {
     schema.methods.sendPhoneVerification = async function () {
         const otp = await createAndStoreOtp(this, 'phone');
         if (otp) {
-            // logic to be implemented
+            // sms service to be implemented
         }
     };
 
