@@ -4,9 +4,9 @@ import PasswordReset from '../../models/PasswordReset.js'
 import template from '../../../emails/resetPasswordEmail.js'
 import transporter from '../../../configs/nodemailer.js'
 
-const action = async (body) => {
+const action = async (data) => {
 
-    const { email, user } = body;
+    const { email, user } = data;
 
     const token = crypto.randomBytes(32).toString('hex');
     const hashedToken = await bcrypt.hash(token, 10);
@@ -28,7 +28,7 @@ const action = async (body) => {
         throw new Error('Something went wrong');
     }
 
-    const data = {
+    const raw = {
         name: user.first_name,
         link: `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`,
         time: passwordReset.expiry
@@ -38,7 +38,7 @@ const action = async (body) => {
         from: process.env.MAIL_FROM,
         to: email,
         subject: 'Password Reset',
-        html: template(data),
+        html: template(raw),
     });
 };
 

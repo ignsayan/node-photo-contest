@@ -1,7 +1,6 @@
-import responseHandler from '../../helpers/responseHandler.js'
+import { responseHandler } from '../../services/index.js'
 import registerAction from '../../actions/auth/registerAction.js'
 import loginAction from '../../actions/auth/loginAction.js'
-
 
 export const register = responseHandler(async (req) => {
     const user = await registerAction(req.body);

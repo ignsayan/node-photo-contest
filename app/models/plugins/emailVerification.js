@@ -1,4 +1,4 @@
-import createAndStoreOtp from '../../helpers/createAndStoreOtp.js'
+import { createAndStoreOtp } from '../../services/index.js'
 import transporter from '../../../configs/nodemailer.js'
 import template from '../../../emails/verificationEmail.js'
 
@@ -21,7 +21,7 @@ const emailVerification = (schema) => {
         }
     };
 
-    schema.methods.hasVerifiedPhone = function () {
+    schema.methods.hasVerifiedEmail = function () {
         return !!this.email_verified_at;
     };
 

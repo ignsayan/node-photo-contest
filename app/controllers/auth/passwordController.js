@@ -1,4 +1,4 @@
-import responseHandler from '../../helpers/responseHandler.js'
+import { responseHandler } from '../../services/index.js'
 import forgotPasswordAction from '../../actions/auth/forgotPasswordAction.js'
 import resetPasswordAction from '../../actions/auth/resetPasswordAction.js'
 
@@ -6,7 +6,6 @@ export const forgotPassword = responseHandler(async (req) => {
     await forgotPasswordAction(req.body);
     return {
         message: 'Password reset email sent successfully',
-        data: {}
     };
 });
 

@@ -1,12 +1,11 @@
-import responseHandler from '../../helpers/responseHandler.js'
+import { responseHandler } from '../../services/index.js'
 import sendOtpAction from '../../actions/auth/sendOtpAction.js'
 import verifyOtpAction from '../../actions/auth/verifyOtpAction.js'
 
 export const sendOtp = responseHandler(async (req) => {
     await sendOtpAction(req.body);
     return {
-        message: 'Verification code sent successfully',
-        data: {}
+        message: 'Verification code sent successfully'
     };
 });
 

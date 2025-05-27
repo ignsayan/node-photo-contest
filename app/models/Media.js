@@ -35,5 +35,5 @@ const schema = new mongoose.Schema({
 
 schema.plugin(mongoosePaginate);
 
-const Image = mongoose.model('Image', schema);
-export default Image
+const Media = mongoose.model('Media', schema);
+export default Media

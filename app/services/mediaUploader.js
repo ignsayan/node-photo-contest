@@ -1,5 +1,5 @@
 import uploader from '../../configs/cloudinary.js'
-import Image from '../models/Image.js'
+import Media from '../models/Media.js'
 
 const mediaUploader = async ({
     buffer,
@@ -25,7 +25,7 @@ const mediaUploader = async ({
         stream.end(buffer);
     });
 
-    const image = await Image.create({
+    const media = await Media.create({
         ref_id: refId,
         ref_model: refModel,
         type,
@@ -33,7 +33,7 @@ const mediaUploader = async ({
         url: file.secure_url,
     });
 
-    return image
+    return media
 };
 
 export default mediaUploader

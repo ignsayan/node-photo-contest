@@ -2,9 +2,9 @@ import User from '../../models/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const action = async (body) => {
+const action = async (data) => {
 
-    const { email, username, password } = body;
+    const { email, username, password } = data;
 
     const user = await User.findOne({
         $or: [

@@ -25,9 +25,7 @@ app.use('/api', [
     userRoute,
 ]);
 
-// in app view templates
-// app.set('view engine', 'ejs');
-app.get('/', index);
+app.get('/', index); // root index
 
 // start the server
 app.listen(process.env.APP_PORT, () => {

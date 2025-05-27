@@ -10,6 +10,9 @@ const validateRules = (rules, controller) => {
         (req, res, next) => {
             files.any()(req, res, (error) => {
                 if (error) req.multerError = error;
+                if (req.files && req.files.length > 0) {
+                    req.body.files = req.files;
+                }
                 next();
             });
         },

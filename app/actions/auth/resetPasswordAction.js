@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 import PasswordReset from '../../models/PasswordReset.js'
 import User from '../../models/User.js'
 
-const action = async (body) => {
+const action = async (data) => {
 
-    let { token, email, password } = body;
+    let { token, email, password } = data;
 
     const user = await User.findOne({ email });
     if (!user) throw new Error('Invalid email');

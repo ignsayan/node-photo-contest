@@ -1,4 +1,4 @@
-import createAndStoreOtp from '../../helpers/createAndStoreOtp.js'
+import { createAndStoreOtp } from '../../services/index.js'
 
 const phoneVerification = (schema) => {
 

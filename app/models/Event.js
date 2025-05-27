@@ -66,7 +66,7 @@ const schema = new mongoose.Schema({
 });
 
 schema.virtual('banner', {
-    ref: 'Image',
+    ref: 'Media',
     localField: '_id',
     foreignField: 'ref_id',
     justOne: true,
@@ -74,7 +74,7 @@ schema.virtual('banner', {
 });
 
 schema.virtual('user_uploads', {
-    ref: 'Image',
+    ref: 'Media',
     localField: '_id',
     foreignField: 'ref_id',
     justOne: false,

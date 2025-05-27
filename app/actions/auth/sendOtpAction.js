@@ -1,8 +1,8 @@
 import User from '../../models/User.js'
 
-const action = async (body) => {
+const action = async (data) => {
 
-    const { attribute, channel } = body;
+    const { attribute, channel } = data;
 
     const user = await User.findOne({ [channel]: attribute });
 
@@ -10,8 +10,15 @@ const action = async (body) => {
         throw new Error('No user found with this record');
     }
 
-    if (channel === 'email') await user.sendEmailVerification();
-    if (channel === 'phone') await user.sendPhoneVerification();
+    if (channel === 'email') {
+        if (user.hasVerifiedEmail()) throw new Error('Email already verified');
+        await user.sendEmailVerification();
+    }
+
+    if (channel === 'phone') {
+        if (user.hasVerifiedPhone()) throw new Error('Phone already verified');
+        await user.sendPhoneVerification();
+    }
 };
 
 export default action

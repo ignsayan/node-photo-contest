@@ -13,8 +13,7 @@ const responseHandler = (fn) => {
 
             const result = await fn(req, proxy);
             const isValid = result &&
-                typeof result === 'object' &&
-                result.data !== undefined;
+                typeof result === 'object';
 
             if (!isValid) {
                 throw {
@@ -27,7 +26,7 @@ const responseHandler = (fn) => {
             if (typeof result.message === 'string') {
                 response.message = result.message;
             }
-            response.data = result.data;
+            response.data = result?.data;
             return res.status(200).json(response);
 
         } catch (error) {

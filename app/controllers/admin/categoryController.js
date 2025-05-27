@@ -1,17 +1,9 @@
-import responseHandler from '../../helpers/responseHandler.js'
+import { responseHandler } from '../../services/index.js'
 import Category from '../../models/Category.js'
-
+import listCategoryAction from '../../actions/admin/listCategoryAction.js'
 
 export const listCategories = responseHandler(async (req) => {
-    const { search, page, limit } = req.query;
-
-    const query = search ? { slug: new RegExp(search, 'i') } : {};
-    const options = {
-        page: page ? parseInt(page) : 1,
-        limit: limit ? parseInt(limit) : 10,
-        sort: { createdAt: -1 },
-    }
-    const categories = await Category.paginate(query, options);
+    const categories = await listCategoryAction(req.query);
     return { data: categories };
 });
 

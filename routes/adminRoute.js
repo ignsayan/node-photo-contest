@@ -16,7 +16,6 @@ import {
 
 // validation rules
 import createEventRule from '../app/validations/admin/createEventRule.js'
-import updateEventRule from '../app/validations/admin/updateEventRule.js'
 
 const route = router();
 
@@ -28,7 +27,7 @@ route.use(isAuthenticated, hasRole('admin'));
 route.get('/event/list', listEvents);
 route.post('/event/create', validateRules(createEventRule, createEvent));
 route.get('/event/:id', getEvent);
-route.put('/event/:id', validateRules(updateEventRule, updateEvent));
+route.put('/event/:id', updateEvent);
 route.delete('/event/:id', deleteEvent);
 
 route.get('/category/list', listCategories);
