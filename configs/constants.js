@@ -3,6 +3,7 @@ import slugify from 'slugify'
 const roles = {
     ADMIN: 'admin',
     USER: 'user',
+    GUEST: 'guest',
 };
 const permissions = {
     CREATE: 'create',
