@@ -8,6 +8,7 @@ export default async function rolePermissionSeeder() {
     const rolesData = [
         { name: ROLE.ADMIN },
         { name: ROLE.USER },
+        { name: ROLE.GUEST },
     ];
 
     const permissionsData = [
