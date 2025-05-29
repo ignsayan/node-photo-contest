@@ -7,7 +7,7 @@ const action = async ({ user, query }) => {
     const params = {
         user: user.id,
         ...(search && { slug: new RegExp(search, 'i') }),
-        ...(status && { status })
+        ...(status && { status: status.toLowerCase() })
     };
 
     const options = {
