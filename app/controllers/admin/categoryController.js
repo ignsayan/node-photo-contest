@@ -2,6 +2,7 @@ import { responseHandler } from '../../services/index.js'
 import Category from '../../models/Category.js'
 import listCategoriesAction from '../../actions/admin/listCategoriesAction.js'
 
+
 export const listCategories = responseHandler(async (req) => {
     const categories = await listCategoriesAction(req.query);
     return { data: categories };

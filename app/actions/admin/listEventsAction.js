@@ -11,9 +11,6 @@ const action = async (data) => {
         page: page ? parseInt(page) : 1,
         limit: limit ? parseInt(limit) : 10,
         sort: { createdAt: -1 },
-        populate: [
-            { path: MEDIA.TYPE.BANNER, select: 'url' },
-        ]
     };
 
     const events = await Event.paginate(query, options);

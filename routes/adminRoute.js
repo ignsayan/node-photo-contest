@@ -2,6 +2,7 @@ import { router, throttle } from '../app/middlewares/throttledRoutes.js'
 import isVerifiedUser from '../app/middlewares/isVerifiedUser.js'
 import {
     createEvent,
+    getSubmissions,
     deleteEvent,
     getEvent,
     listEvents,
@@ -23,11 +24,17 @@ const route = router();
 route.use(isVerifiedUser());
 
 // registered routes
-route.get('/event/list', listEvents);
+route.get('/events',
+    listEvents
+);
 route.post('/event/create',
     throttle(60, 60),
     validateRules(createEventRule, createEvent)
 );
+route.get('/event/submissions',
+    getSubmissions
+);
+
 route.get('/event/:id', getEvent);
 route.put('/event/:id', updateEvent);
 route.delete('/event/:id', deleteEvent);

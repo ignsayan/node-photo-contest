@@ -2,6 +2,7 @@ import { responseHandler } from '../../services/index.js'
 import forgotPasswordAction from '../../actions/auth/forgotPasswordAction.js'
 import resetPasswordAction from '../../actions/auth/resetPasswordAction.js'
 
+
 export const forgotPassword = responseHandler(async (req) => {
     await forgotPasswordAction(req.body);
     return {

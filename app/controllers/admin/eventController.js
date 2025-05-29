@@ -2,7 +2,7 @@ import { responseHandler } from '../../services/index.js'
 import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
 import listEventsAction from '../../actions/admin/listEventsAction.js'
-import { MEDIA } from '../../../configs/constants.js'
+import getSubmissionsAction from '../../actions/admin/getSubmissionsAction.js'
 
 export const listEvents = responseHandler(async (req) => {
     const events = await listEventsAction(req.query);
@@ -17,8 +17,13 @@ export const createEvent = responseHandler(async (req) => {
     };
 });
 
+export const getSubmissions = responseHandler(async (req) => {
+    const submissions = await getSubmissionsAction(req);
+    return { data: { submissions } };
+});
+
 export const getEvent = responseHandler(async (req) => {
-    const event = await Event.findById(req.params.id).populate(MEDIA.TYPE.BANNER);
+    const event = await Event.findById(req.params.id);
     return { data: { event } };
 });
 

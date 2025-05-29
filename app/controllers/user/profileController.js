@@ -2,6 +2,7 @@ import { responseHandler } from '../../services/index.js'
 import User from '../../models/User.js'
 import Event from '../../models/Event.js'
 
+
 export const profile = responseHandler(async (req) => {
     const { id } = req.user;
     const user = await User.findById(id);
