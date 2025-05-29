@@ -3,8 +3,12 @@ import Submission from '../../models/Submission.js'
 
 const action = async ({ user, query }) => {
 
-    const { page, limit } = query;
-    const params = { user: user.id };
+    const { status, page, limit } = query;
+
+    const params = {
+        user: user.id,
+        ...(status && { status: status.toLowerCase() }),
+    };
 
     const options = {
         page: page ? parseInt(page) : 1,
