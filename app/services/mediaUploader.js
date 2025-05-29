@@ -1,4 +1,5 @@
 import uploader from '../../configs/cloudinary.js'
+import { MEDIA } from '../../configs/constants.js'
 import Media from '../models/Media.js'
 
 const mediaUploader = async ({
@@ -6,7 +7,7 @@ const mediaUploader = async ({
     folder = 'uploads',
     refId,
     refModel,
-    type = 'general',
+    type = MEDIA.TYPE.GENERAL,
     user,
 }) => {
 

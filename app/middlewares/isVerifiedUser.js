@@ -19,7 +19,7 @@ const hasVerified = (channel = null) => {
         };
 
         if (!channel) {
-            if (!user.hasVerifiedEmail() && !user.hasVerifiedPhone()) {
+            if (!(user.hasVerifiedEmail() && user.hasVerifiedPhone())) {
                 return res.status(403).json({
                     errors: 'Please complete the verification process'
                 });

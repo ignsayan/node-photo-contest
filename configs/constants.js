@@ -21,3 +21,21 @@ export const PERMISSION = Object.fromEntries(
         key, slugify(value, { lower: true })
     ])
 );
+
+const media = {
+    type: {
+        GENERAL: 'general',
+        BANNER: 'banner',
+        USER_UPLOADS: 'user_uploads',
+    },
+};
+export const MEDIA = {
+    TYPE: Object.fromEntries(
+        Object.entries(media.type).map(([key, value]) => [
+            key, slugify(value, { lower: true })
+        ])
+    ),
+};
+
+console.log(MEDIA.TYPE.USER_UPLOADS);
+

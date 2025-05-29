@@ -1,3 +1,4 @@
+import { MEDIA } from '../../../configs/constants.js'
 import Event from '../../models/Event.js'
 
 const action = async (data) => {
@@ -10,7 +11,7 @@ const action = async (data) => {
         page: page ? parseInt(page) : 1,
         limit: limit ? parseInt(limit) : 10,
         sort: { createdAt: -1 },
-        populate: 'banner'
+        populate: MEDIA.TYPE.BANNER
     }
 
     const events = await Event.paginate(query, options);

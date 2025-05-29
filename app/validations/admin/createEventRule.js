@@ -5,22 +5,12 @@ import slugify from 'slugify'
 
 const rule = [
 
-    body('creator_id')
-        .trim()
-        .notEmpty().withMessage('Creator ID is required').bail()
-        .isMongoId().withMessage('Creator ID must be valid').bail()
-        .custom(async (value) => {
-            const existing = await User.findById(value);
-            if (!existing) throw new Error('Creator ID must be valid');
-            return true;
-        }),
-
     body('title')
         .trim()
         .notEmpty().withMessage('Title is required').bail()
         .custom(async (value) => {
             const slug = slugify(value, { lower: true });
-            const existing = await Event.findOne({ slug });
+            const existing = await Event.findOne({ slug, status: 'active' });
             if (existing) throw new Error('Title already exists');
             return true;
         }),

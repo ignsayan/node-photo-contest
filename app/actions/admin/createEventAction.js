@@ -3,20 +3,23 @@ import Category from '../../models/Category.js'
 import Event from '../../models/Event.js'
 import { mediaUploader } from '../../services/index.js'
 
-const action = async (data) => {
+const action = async ({ user, body }) => {
 
-    let { category, visibility, files } = data;
+    let { category, visibility, files } = body;
 
     const categorySlug = slugify(category, { lower: true });
 
     category = await Category.findOne({ slug: categorySlug })
         || await Category.create({ name: category });
 
-    data.category = category._id;
-    data.visibility = [0, '0', false, 'false'].includes(visibility) ? false : true;
-    data.user = data.creator_id;
+    visibility = [0, '0', false, 'false'].includes(visibility) ? false : true;
 
-    const event = await Event.create(data);
+    const event = await Event.create({
+        ...body,
+        category: category._id,
+        user: user.id,
+        visibility,
+    });
 
     if (event && files.length > 0) {
 

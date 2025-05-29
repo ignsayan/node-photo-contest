@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 import slugify from 'slugify'
+import { MEDIA } from '../../configs/constants.js'
 
 const transform = (doc, rec) => {
     delete rec.id;
@@ -65,20 +66,20 @@ const schema = new mongoose.Schema({
     versionKey: false,
 });
 
-schema.virtual('banner', {
+schema.virtual(MEDIA.TYPE.BANNER, {
     ref: 'Media',
     localField: '_id',
     foreignField: 'ref_id',
     justOne: true,
-    options: { match: { ref_model: 'Event', type: 'banner' } }
+    options: { match: { ref_model: 'Event', type: MEDIA.TYPE.BANNER } }
 });
 
-schema.virtual('user_uploads', {
+schema.virtual(MEDIA.TYPE.USER_UPLOADS, {
     ref: 'Media',
     localField: '_id',
     foreignField: 'ref_id',
     justOne: false,
-    options: { match: { ref_model: 'Event', type: 'user_upload' } }
+    options: { match: { ref_model: 'Event', type: MEDIA.TYPE.USER_UPLOADS } }
 });
 
 schema.set('toObject', { virtuals: true, transform });

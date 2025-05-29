@@ -40,11 +40,11 @@ route.post('/forgot-password',
 route.post('/reset-password',
     validateRules(resetPasswordRule, resetPassword)
 );
-route.post('/send-otp',
+route.post('/send-verification',
     throttle(5, 30),
     validateRules(sendOtpRule, sendOtp)
 );
-route.post('/verify-otp',
+route.post('/verify',
     throttle(5, 30),
     validateRules(verifyOtpRule, verifyOtp)
 );
