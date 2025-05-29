@@ -79,7 +79,6 @@ const schema = new mongoose.Schema({
     toObject: { virtuals: true, transform },
 });
 
-// eager loading with pre populate
 schema.pre(/^find/, function () {
     this.populate('roles', 'name -_id')
         .populate('permissions', 'name -_id');

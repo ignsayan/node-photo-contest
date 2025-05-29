@@ -1,8 +1,8 @@
 import { responseHandler } from '../../services/index.js'
 import Event from '../../models/Event.js'
-import createSubmissionAction from '../../actions/user/createSubmissionAction.js'
-import Submission from '../../models/Submission.js'
 import { MEDIA } from '../../../configs/constants.js'
+import createSubmissionAction from '../../actions/user/createSubmissionAction.js'
+import listSubmissionsAction from '../../actions/user/listSubmissionsAction.js'
 
 export const getActiveEvents = responseHandler(async (req) => {
     const events = await Event
@@ -21,10 +21,6 @@ export const createSubmission = responseHandler(async (req) => {
 });
 
 export const listSubmissions = responseHandler(async (req) => {
-    const submissions = await Submission
-        .find({ user: req.user.id })
-        .populate(MEDIA.TYPE.USER_UPLOADS)
-        .populate('event');
-
-    return { data: { submissions } };
+    const submissions = await listSubmissionsAction(req.query);
+    return { data: submissions };
 });

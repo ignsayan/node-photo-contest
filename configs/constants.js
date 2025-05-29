@@ -36,6 +36,3 @@ export const MEDIA = {
         ])
     ),
 };
-
-console.log(MEDIA.TYPE.USER_UPLOADS);
-

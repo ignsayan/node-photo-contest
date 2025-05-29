@@ -32,8 +32,8 @@ const schema = new mongoose.Schema({
 
 schema.virtual(MEDIA.TYPE.USER_UPLOADS, {
     ref: 'Media',
-    localField: '_id',
     foreignField: 'ref_id',
+    localField: '_id',
     justOne: false,
     options: { match: { ref_model: 'Submission', type: MEDIA.TYPE.USER_UPLOADS } }
 });

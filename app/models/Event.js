@@ -76,8 +76,8 @@ schema.virtual(MEDIA.TYPE.BANNER, {
 
 schema.virtual(MEDIA.TYPE.USER_UPLOADS, {
     ref: 'Media',
-    localField: '_id',
     foreignField: 'ref_id',
+    localField: '_id',
     justOne: false,
     options: { match: { ref_model: 'Event', type: MEDIA.TYPE.USER_UPLOADS } }
 });

@@ -1,10 +1,11 @@
 import { responseHandler } from '../../services/index.js'
 import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
-import listEventAction from '../../actions/admin/listEventAction.js'
+import listEventsAction from '../../actions/admin/listEventsAction.js'
+import { MEDIA } from '../../../configs/constants.js'
 
 export const listEvents = responseHandler(async (req) => {
-    const events = await listEventAction(req.query);
+    const events = await listEventsAction(req.query);
     return { data: events };
 });
 
@@ -17,7 +18,7 @@ export const createEvent = responseHandler(async (req) => {
 });
 
 export const getEvent = responseHandler(async (req) => {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id).populate(MEDIA.TYPE.BANNER);
     return { data: { event } };
 });
 
