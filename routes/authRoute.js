@@ -2,6 +2,7 @@ import { router, throttle } from '../app/middlewares/throttledRoutes.js'
 import {
     register,
     login,
+    logout,
 } from '../app/controllers/auth/authController.js'
 import {
     forgotPassword,
@@ -20,6 +21,7 @@ import forgotPasswordRule from '../app/validations/auth/forgotPasswordRule.js'
 import resetPasswordRule from '../app/validations/auth/resetPasswordRule.js'
 import sendOtpRule from '../app/validations/auth/sendOtpRule.js'
 import verifyOtpRule from '../app/validations/auth/verifyOtpRule.js'
+import isAuthenticated from '../app/middlewares/isAuthenticated.js'
 
 
 const route = router();
@@ -47,6 +49,10 @@ route.post('/send-verification',
 route.post('/verify',
     throttle(5, 30),
     validateRules(verifyOtpRule, verifyOtp)
+);
+route.post('/logout',
+    isAuthenticated,
+    logout
 );
 
 export default route
