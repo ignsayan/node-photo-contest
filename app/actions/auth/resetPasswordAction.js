@@ -21,8 +21,7 @@ const action = async (data) => {
     const isValidToken = await bcrypt.compare(token, passwordReset.token);
     if (!isValidToken) throw new Error('Invalid token');
 
-    const hash = await bcrypt.hash(password, 10);
-    user.password = hash;
+    user.password = password;
     await user.save();
     await passwordReset.deleteOne();
 

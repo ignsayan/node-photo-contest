@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
+import bcrypt from 'bcrypt'
 import Permission from './Permission.js'
 import Role from './Role.js'
 import emailVerification from './plugins/emailVerification.js'
@@ -82,6 +83,13 @@ const schema = new mongoose.Schema({
 schema.pre(/^find/, function () {
     this.populate('roles', 'name -_id')
         .populate('permissions', 'name -_id');
+});
+
+schema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
 });
 
 schema.plugin(mongoosePaginate);

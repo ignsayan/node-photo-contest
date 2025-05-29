@@ -1,13 +1,10 @@
 import User from '../../models/User.js'
 import Role from '../../models/Role.js'
-import bcrypt from 'bcrypt'
+import { ROLE } from '../../../configs/constants.js'
 
 const action = async (data) => {
 
-    let { first_name, last_name, email, phone, password } = data;
-
-    phone = phone && phone.trim() !== '' ? phone : null;
-    password = await bcrypt.hash(password, 10);
+    const { first_name, last_name, email, phone, password } = data;
 
     const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
 
@@ -20,12 +17,19 @@ const action = async (data) => {
         password,
     });
 
-    const role = await Role.findOne({ name: 'user' });
-
+    const role = await Role.findOne({ name: ROLE.USER });
     user.roles.push(role._id);
     await user.save();
 
-    return user;
+    return {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        email_verified_at: user.email_verified_at,
+        phone_verified_at: user.phone_verified_at,
+    };
 };
 
 export default action

@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
+import slugify from 'slugify'
 
 const schema = new mongoose.Schema({
     name: {
         type: String,
-        unique: true,
         required: true,
+        unique: true,
         lowercase: true,
         trim: true,
         validate: {
@@ -19,6 +20,11 @@ const schema = new mongoose.Schema({
 }, {
     timestamps: true,
     versionKey: false,
+});
+
+schema.pre('save', function (next) {
+    this.name = slugify(this.name, { lower: true });
+    next();
 });
 
 const Role = mongoose.model('Role', schema);
