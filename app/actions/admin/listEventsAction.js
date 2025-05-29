@@ -1,11 +1,14 @@
-import { MEDIA } from '../../../configs/constants.js'
 import Event from '../../models/Event.js'
 
-const action = async (data) => {
+const action = async ({ user, query }) => {
 
-    const { search, page, limit } = data;
+    const { search, status, page, limit } = query;
 
-    const query = search ? { slug: new RegExp(search, 'i') } : {};
+    const params = {
+        user: user.id,
+        ...(search && { slug: new RegExp(search, 'i') }),
+        ...(status && { status })
+    };
 
     const options = {
         page: page ? parseInt(page) : 1,
@@ -13,7 +16,7 @@ const action = async (data) => {
         sort: { createdAt: -1 },
     };
 
-    const events = await Event.paginate(query, options);
+    const events = await Event.paginate(params, options);
     return events;
 };
 
