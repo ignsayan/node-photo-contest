@@ -1,6 +1,5 @@
 import User from '../../models/User.js'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 
 const action = async (data) => {
 
@@ -21,11 +20,7 @@ const action = async (data) => {
         throw error;
     }
 
-    const token = jwt.sign(
-        { id: user._id },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' }
-    );
+    const token = user.getAccessToken();
 
     return { user, token };
 };

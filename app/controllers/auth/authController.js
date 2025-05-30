@@ -5,10 +5,10 @@ import logoutAction from '../../actions/auth/logoutAction.js'
 
 
 export const register = responseHandler(async (req) => {
-    const user = await registerAction(req.body);
+    const { user, token } = await registerAction(req.body);
     return {
         message: 'User created successfully',
-        data: { user }
+        data: { user, token }
     };
 });
 

@@ -5,6 +5,7 @@ import Permission from './Permission.js'
 import Role from './Role.js'
 import emailVerification from './plugins/emailVerification.js'
 import phoneVerification from './plugins/phoneVerification.js'
+import tokenGenerator from './plugins/tokenGenerator.js'
 
 const transform = (doc, rec) => {
     delete rec.password;
@@ -94,6 +95,7 @@ schema.pre('save', async function (next) {
 schema.plugin(mongoosePaginate);
 schema.plugin(emailVerification);
 schema.plugin(phoneVerification);
+schema.plugin(tokenGenerator);
 
 const User = mongoose.model('User', schema)
 export default User

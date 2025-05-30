@@ -1,6 +1,7 @@
 import User from '../../models/User.js'
 import Role from '../../models/Role.js'
 import { ROLE } from '../../../configs/constants.js'
+import jwt from 'jsonwebtoken'
 
 const action = async (data) => {
 
@@ -17,21 +18,17 @@ const action = async (data) => {
         password,
     });
 
-    const role = await Role.findOne({ name: ROLE.USER });
-    user.roles.push(role._id);
-    await user.save();
+    if (user) {
 
-    if (user) await user.sendEmailVerification();
+        const role = await Role.findOne({ name: ROLE.USER });
+        user.roles.push(role._id);
+        await user.save();
 
-    return {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        username: user.username,
-        email: user.email,
-        phone: user.phone,
-        email_verified_at: user.email_verified_at,
-        phone_verified_at: user.phone_verified_at,
-    };
+        await user.sendEmailVerification();
+        const token = user.getAccessToken();
+
+        return { user, token };
+    }
 };
 
 export default action

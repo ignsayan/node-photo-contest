@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import PasswordReset from '../../models/PasswordReset.js'
 import User from '../../models/User.js'
@@ -25,11 +24,7 @@ const action = async (data) => {
     await user.save();
     await passwordReset.deleteOne();
 
-    token = jwt.sign(
-        { id: user._id },
-        process.env.JWT_SECRET,
-        { expiresIn: '1h' }
-    );
+    token = user.getAccessToken();
 
     return { user, token };
 };
