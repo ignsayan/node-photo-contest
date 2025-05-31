@@ -23,7 +23,7 @@ export default function template(data) {
             </div>
 
             <p style="font-size: 14px; color: #777;">
-                This code will expire in <strong>${time} minutes</strong>.
+                This link will expire in <strong>${time} minutes</strong>.
             </p>
             
             <p style="font-size: 14px; color: #999;">
