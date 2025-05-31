@@ -17,7 +17,7 @@ import createSubmissionRule from '../app/validations/user/createSubmissionRule.j
 const route = router();
 
 // registered middlewares
-route.use(isVerifiedUser());
+route.use(isVerifiedUser('email'));
 
 // registered routes
 route.get('/profile',
