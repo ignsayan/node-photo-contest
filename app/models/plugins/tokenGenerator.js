@@ -4,7 +4,7 @@ const tokenGenerator = (schema) => {
 
     schema.methods.getAccessToken = function () {
         const token = jwt.sign(
-            { _id: this._id },
+            { id: this._id },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
@@ -13,7 +13,7 @@ const tokenGenerator = (schema) => {
 
     schema.methods.getRefreshToken = function () {
         const token = jwt.sign(
-            { _id: this._id },
+            { id: this._id },
             process.env.JWT_SECRET,
             { expiresIn: '7d' }
         );
