@@ -5,6 +5,7 @@ import {
 } from '../app/controllers/user/profileController.js'
 import {
     getActiveEvents,
+    eventDetails,
     createSubmission,
     listSubmissions,
 } from '../app/controllers/user/submissionController.js'
@@ -16,10 +17,8 @@ import createSubmissionRule from '../app/validations/user/createSubmissionRule.j
 
 const route = router();
 
-// registered middlewares
+// routes that require email verification
 route.use(isVerifiedUser('email'));
-
-// registered routes
 route.get('/profile',
     throttle(60, 60),
     profile
@@ -27,6 +26,12 @@ route.get('/profile',
 route.get('/events',
     getActiveEvents
 );
+route.get('/event/:id',
+    eventDetails
+);
+
+// routes that require phone verification
+route.use(isVerifiedUser('phone'));
 route.post('/submission/create',
     throttle(60, 60),
     validateRules(createSubmissionRule, createSubmission)

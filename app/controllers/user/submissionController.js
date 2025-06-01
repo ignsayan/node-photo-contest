@@ -1,5 +1,6 @@
 import { responseHandler } from '../../services/index.js'
 import listActiveEventsAction from '../../actions/user/listActiveEventsAction.js'
+import eventDetailsAction from '../../actions/user/eventDetailsAction.js'
 import createSubmissionAction from '../../actions/user/createSubmissionAction.js'
 import listSubmissionsAction from '../../actions/user/listSubmissionsAction.js'
 
@@ -7,6 +8,11 @@ import listSubmissionsAction from '../../actions/user/listSubmissionsAction.js'
 export const getActiveEvents = responseHandler(async (req) => {
     const events = await listActiveEventsAction();
     return { data: { events } };
+});
+
+export const eventDetails = responseHandler(async (req) => {
+    const event = await eventDetailsAction(req.params);
+    return { data: { event } };
 });
 
 export const createSubmission = responseHandler(async (req) => {
