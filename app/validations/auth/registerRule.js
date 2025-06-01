@@ -1,4 +1,5 @@
 import { body } from 'express-validator'
+import parsePhoneNumberFromString from 'libphonenumber-js'
 import User from '../../models/User.js'
 
 const rule = [
@@ -28,6 +29,10 @@ const rule = [
         .isNumeric().withMessage('Phone must be a number').bail()
         .isLength({ min: 10, max: 10 }).withMessage('Phone must be 10 digits').bail()
         .custom(async (value) => {
+            const number = parsePhoneNumberFromString(value);
+            if (!number || !number.isValid()) {
+                throw new Error('Phone must be a valid number with country code');
+            }
             const existing = await User.findOne({ phone: value });
             if (existing) throw new Error('Phone number already exists');
             return true;
