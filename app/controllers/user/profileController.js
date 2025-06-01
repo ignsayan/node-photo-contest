@@ -16,3 +16,10 @@ export const activeEvents = responseHandler(async (req) => {
     );
     return { data: { events } };
 });
+
+export const changePassword = responseHandler(async (req) => {
+    const { user, body } = req;
+    user.password = body.password;
+    await user.save();
+    return { message: 'Password updated successfully' };
+});
