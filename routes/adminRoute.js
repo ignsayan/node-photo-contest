@@ -1,6 +1,9 @@
 import { router, throttle } from '../app/middlewares/throttledRoutes.js'
 import isVerifiedUser from '../app/middlewares/isVerifiedUser.js'
 import {
+    getOverview,
+} from '../app/controllers/admin/dashboardController.js'
+import {
     createEvent,
     deleteEvent,
     getEvent,
@@ -26,6 +29,9 @@ const route = router();
 route.use(isVerifiedUser());
 
 // registered routes
+route.get('/overview',
+    getOverview
+);
 route.get('/events',
     listEvents
 );
