@@ -1,5 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 const docPath = path.resolve('./docs');
 
@@ -25,5 +26,15 @@ const options = {
 };
 
 const swagger = swaggerJSDoc(options);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const __swaggerDistPath = path.join(
+    __dirname,
+    '..',
+    'swagger-ui-dist',
+    'node_modules',
+);
 
 export default swagger
