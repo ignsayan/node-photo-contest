@@ -61,8 +61,8 @@ export default function index(req, res) {
     <body>
       <div class="container">
         <h1>API Endpoints</h1>
-        <p>for: <a href="${process.env.FRONTEND_URL}">
-            ${process.env.FRONTEND_URL}
+        <p>for: <a href="${process.env.APP_HOST}/api/docs">
+            ${process.env.APP_HOST}
           </a>→</p>
       </div>
     </body>

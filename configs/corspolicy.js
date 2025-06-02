@@ -6,6 +6,7 @@ dotenv.config();
 const corspolicy = cors({
     origin: [
         'http://localhost:5090',
+        process.env.APP_HOST,
         process.env.FRONTEND_URL
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],

@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import dbconnect from './configs/database.js'
 import corspolicy from './configs/corspolicy.js'
 import index from './views/index.js'
+import apiDocumentation from './docs/apiDocumentation.js'
 import isAuthenticated from './app/middlewares/isAuthenticated.js'
 import hasRole from './app/middlewares/hasRole.js'
 import authRoute from './routes/authRoute.js'
@@ -15,10 +16,12 @@ await dbconnect();
 
 const app = express();
 
-app.get('/', index); // root index
 app.use(corspolicy);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.get('/', index); // root index
+apiDocumentation(app);
 
 // guest routes
 app.use('/api/auth', authRoute);
