@@ -8,6 +8,7 @@ import hasRole from './app/middlewares/hasRole.js'
 import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
+import './schedular.js'
 
 dotenv.config();
 await dbconnect();
