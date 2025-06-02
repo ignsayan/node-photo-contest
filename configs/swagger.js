@@ -7,11 +7,6 @@ const options = {
             title: `${process.env.APP_NAME}`,
             version: '1.0.0',
             description: 'API Documentation V1',
-            contact: {
-                name: 'API Support',
-                url: `${process.env.APP_HOST}/support`,
-                email: 'support@example.com',
-            },
         },
         servers: [
             {
