@@ -6,7 +6,7 @@ const options = {
         info: {
             title: `${process.env.APP_NAME}`,
             version: '1.0.0',
-            description: 'API documentation',
+            description: 'API Documentation V1',
         },
         servers: [
             {
