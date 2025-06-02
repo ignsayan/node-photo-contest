@@ -33,8 +33,8 @@ const __dirname = path.dirname(__filename);
 export const __swaggerDistPath = path.join(
     __dirname,
     '..',
-    'swagger-ui-dist',
     'node_modules',
+    'swagger-ui-dist'
 );
 
 export default swagger

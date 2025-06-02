@@ -44,7 +44,7 @@ route.get('/event/:id',
     throttle(60, 60),
     getEvent
 );
-route.patch('/event/:id',
+route.put('/event/:id',
     throttle(10, 60),
     validateRules(updateEventRule, updateEvent)
 );
