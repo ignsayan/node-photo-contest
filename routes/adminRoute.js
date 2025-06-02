@@ -21,6 +21,7 @@ import {
 // validation rules
 import validateRules from '../app/middlewares/validateRules.js'
 import createEventRule from '../app/validations/admin/createEventRule.js'
+import updateEventRule from '../app/validations/admin/updateEventRule.js'
 
 
 const route = router();
@@ -36,11 +37,17 @@ route.get('/events',
     listEvents
 );
 route.post('/event/create',
-    throttle(60, 60),
+    throttle(20, 60),
     validateRules(createEventRule, createEvent)
 );
-route.get('/event/:id', getEvent);
-route.put('/event/:id', updateEvent);
+route.get('/event/:id',
+    throttle(60, 60),
+    getEvent
+);
+route.patch('/event/:id',
+    throttle(10, 60),
+    validateRules(updateEventRule, updateEvent)
+);
 route.delete('/event/:id', deleteEvent);
 
 route.get('/category/list', listCategories);

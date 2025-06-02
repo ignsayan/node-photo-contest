@@ -7,6 +7,7 @@ const action = async (data) => {
     const { id } = data;
 
     const event = await Event.findById(id);
+    if (!event) throw new Error('Event not found');
 
     const submissions = await Submission.find({ event: id })
         .populate(

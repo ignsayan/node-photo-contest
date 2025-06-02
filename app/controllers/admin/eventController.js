@@ -2,6 +2,7 @@ import { responseHandler } from '../../services/index.js'
 import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
 import listEventsAction from '../../actions/admin/listEventsAction.js'
+import updateEventAction from '../../actions/admin/updateEventAction.js'
 
 
 export const listEvents = responseHandler(async (req) => {
@@ -23,7 +24,11 @@ export const getEvent = responseHandler(async (req) => {
 });
 
 export const updateEvent = responseHandler(async (req) => {
-    //
+    const event = await updateEventAction(req);
+    return {
+        message: 'Event updated successfully',
+        data: { event }
+    };
 });
 
 export const deleteEvent = responseHandler(async (req) => {

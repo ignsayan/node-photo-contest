@@ -13,27 +13,29 @@ const rule = [
             return true;
         }),
 
-    check('user_uploads').custom((_, { req }) => {
+    check('user_uploads')
+        .custom(async (value, { req }) => {
+            const files = req.files;
+            if (!files || !Array.isArray(files)) {
+                throw new Error('User uploads must be an array of images');
+            }
 
-        const files = req.files;
-        if (!files || !Array.isArray(files)) {
-            throw new Error('User uploads must be an array of images');
-        }
-        if (files.length < 1 || files.length > 3) {
-            throw new Error('You must upload between 1 and 3 images');
-        }
-        for (const file of files) {
-            const mimes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!mimes.includes(file.mimetype)) {
-                throw new Error(`Invalid file type: ${file.originalname}`);
+            const event = await Event.findById(req.body.event);
+            if (files.length < 1 || files.length > event.upload_limit) {
+                throw new Error(`Maximum image upload limit is ${event.upload_limit}`);
             }
-            const limit = 500 * 1024;
-            if (file.size > limit) {
-                throw new Error(`Image must be less than 500 KB`);
+            for (const file of files) {
+                const mimes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!mimes.includes(file.mimetype)) {
+                    throw new Error(`Invalid file type: ${file.originalname}`);
+                }
+                const limit = event.upload_size * 1024;
+                if (file.size > limit) {
+                    throw new Error(`Image must be less than ${event.upload_size} KB`);
+                }
             }
-        }
-        return true;
-    }),
+            return true;
+        }),
 ];
 
 export default rule

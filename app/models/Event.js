@@ -60,6 +60,14 @@ const schema = new mongoose.Schema({
         type: String,
         enum: ['active', 'nominated', 'voting', 'ended'],
         default: 'active',
+    },
+    upload_limit: {
+        type: Number,
+        required: true,
+    },
+    upload_size: {
+        type: Number,
+        required: true,
     }
 }, {
     timestamps: true,

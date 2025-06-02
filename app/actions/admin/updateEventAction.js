@@ -2,9 +2,10 @@ import slugify from 'slugify'
 import Category from '../../models/Category.js'
 import Event from '../../models/Event.js'
 import { mediaUploader } from '../../services/index.js'
+import Media from '../../models/Media.js'
 import { MEDIA } from '../../../configs/constants.js'
 
-const action = async ({ user, body }) => {
+const action = async ({ params, body }) => {
 
     let { category, visibility, files } = body;
 
@@ -15,14 +16,19 @@ const action = async ({ user, body }) => {
 
     visibility = [0, '0', false, 'false'].includes(visibility) ? false : true;
 
-    const event = await Event.create({
+    const event = await Event.findByIdAndUpdate(params.id, {
         ...body,
         category: category._id,
-        user: user.id,
         visibility,
+    }, {
+        new: true,
     });
 
     if (event && files) {
+        await Media.deleteMany({
+            ref_id: event._id,
+            ref_model: Event.modelName
+        });
         await mediaUploader({
             buffer: files[0].buffer,
             refId: event._id,
