@@ -21,6 +21,9 @@ const options = {
     ],
 };
 
-const swagger = swaggerJSDoc(options);
+const swagger = swaggerJSDoc(options, {
+    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.22.0/swagger-ui.min.css',
+    customJsUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.22.0/swagger-ui.min.js',
+});
 
 export default swagger
