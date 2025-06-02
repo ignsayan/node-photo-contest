@@ -1,4 +1,7 @@
 import swaggerJSDoc from 'swagger-jsdoc'
+import path from 'path'
+
+const docPath = path.resolve('./docs');
 
 const options = {
     definition: {
@@ -15,14 +18,12 @@ const options = {
         ],
     },
     apis: [
-        './docs/authDoc.js',
-        './docs/adminDoc.js',
-        './docs/userDoc.js',
+        path.join(docPath, 'authDoc.js'),
+        path.join(docPath, 'adminDoc.js'),
+        path.join(docPath, 'userDoc.js'),
     ],
 };
 
-const swagger = swaggerJSDoc(options, {
-    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.3.0/swagger-ui.min.css',
-});
+const swagger = swaggerJSDoc(options);
 
 export default swagger
