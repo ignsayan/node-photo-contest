@@ -9,8 +9,8 @@ const __dirname = path.dirname(__filename);
 
 const __swaggerDistPath = path.join(
     __dirname,
-    "node_modules",
-    "swagger-ui-dist"
+    'swagger-ui-dist',
+    'node_modules',
 );
 
 const apiDocumentation = (app) => {
