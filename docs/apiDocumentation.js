@@ -1,11 +1,6 @@
-import swaggerUi from 'swagger-ui-express'
-import swaggerSpec from '../configs/swagger.js'
+import swagger from '../configs/swagger.js'
 
-const apiDocumentation = (app) => {
-    app.use('/api/docs',
-        swaggerUi.serve,
-        swaggerUi.setup(swaggerSpec)
-    );
-};
-
-export default apiDocumentation
+export default function apiDocumentation(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(swagger);
+}

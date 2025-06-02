@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', index); // root index
-apiDocumentation(app);
+app.get('/api/docs', apiDocumentation);
 
 // guest routes
 app.use('/api/auth', authRoute);
