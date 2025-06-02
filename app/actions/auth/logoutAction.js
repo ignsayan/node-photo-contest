@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import redis from '../../../configs/redisclient.js'
+import redis from '../../../configs/redis.js'
 
 const action = async (data) => {
 
