@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', index); // root index
-app.get('/swagger/docs', apiDocumentation);
+apiDocumentation(app);
 
 // guest routes
 app.use('/api/auth', authRoute);
