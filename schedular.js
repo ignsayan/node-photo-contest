@@ -2,15 +2,15 @@ import cron from 'node-cron'
 import Event from './app/models/Event.js'
 
 // every day at midnight
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 0 * * *', async () => {
     const today = new Date();
     await Event.updateMany(
         {
-            status: 'ended',
-            end_date: { $gte: today }
+            status: 'active',
+            end_date: { $lte: today }
         },
         {
-            $set: { status: 'active' }
+            $set: { status: 'ended' }
         }
     );
 });
