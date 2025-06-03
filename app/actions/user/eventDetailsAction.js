@@ -1,10 +1,15 @@
 import { MEDIA } from '../../../configs/constants.js'
 import Event from '../../models/Event.js'
 import Submission from '../../models/Submission.js'
+import cache from '../../../configs/cache.js'
 
 const action = async (data) => {
 
     const { id } = data;
+
+    if (cache.has('contest')) {
+        return JSON.parse(cache.get('contest'));
+    }
 
     const event = await Event.findById(id);
     if (!event) throw new Error('Event not found');
@@ -32,6 +37,8 @@ const action = async (data) => {
         'total_submissions': submissions.length,
         'user_uploads': media,
     };
+
+    cache.set('contest', JSON.stringify(contest));
 
     return contest;
 };

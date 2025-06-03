@@ -2,13 +2,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import dbconnect from './configs/database.js'
 import corspolicy from './configs/cors.js'
-import index from './views/index.js'
-import apiDocumentation from './docs/apiDocumentation.js'
 import isAuthenticated from './app/middlewares/isAuthenticated.js'
 import hasRole from './app/middlewares/hasRole.js'
 import authRoute from './routes/authRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import userRoute from './routes/userRoute.js'
+import webRoute from './routes/webRoute.js'
 import './schedular.js'
 
 dotenv.config();
@@ -20,10 +19,8 @@ app.use(corspolicy);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', index); // root index
-apiDocumentation(app);
-
 // guest routes
+app.use('/', webRoute);
 app.use('/api/auth', authRoute);
 
 // authenticated routes
