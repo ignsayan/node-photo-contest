@@ -41,7 +41,7 @@
  *     parameters:
  *       - name: id
  *         in: path
- *         description: Event ID
+ *         description: Event unique ID
  *         required: true
  *         schema:
  *           type: string
@@ -72,9 +72,11 @@
  *                 type: string
  *                 description: ID of the event being submitted to
  *               user_uploads:
- *                 type: string
- *                 format: binary
- *                 description: File to upload
+ *                 type: array
+ *                 description: Files to be uploaded
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *     responses:
  *       default:
  *         description: API response
@@ -95,7 +97,6 @@
  *         required: false
  *         schema:
  *           type: string
- *           example: pending
  *       - name: page
  *         in: query
  *         description: Page number for pagination

@@ -73,7 +73,7 @@
  *         name: search
  *         schema:
  *           type: string
- *         description: Search events by title or description
+ *         description: Search term to filter events
  *       - in: query
  *         name: page
  *         schema:
@@ -88,7 +88,7 @@
  *         name: status
  *         schema:
  *           type: string
- *         description: Filter by event status
+ *         description: Filter by event status (e.g., pending, approved, rejected)
  *     responses:
  *       default:
  *         description: API response
@@ -121,31 +121,43 @@
  *             properties:
  *               title:
  *                 type: string
+ *                 description: Event title
  *               category:
  *                 type: string
+ *                 description: Category name
  *               start_date:
  *                 type: string
  *                 format: date
+ *                 description: Start date of the event
  *               end_date:
  *                 type: string
  *                 format: date
+ *                 description: End date of the event
  *               upload_limit:
  *                 type: integer
+ *                 description: File upload limit
  *               upload_size:
  *                 type: integer
+ *                 description: Maximum file size limit
  *               banner:
  *                 type: string
  *                 format: binary
+ *                 description: Event banner image
  *               subtitle:
  *                 type: string
+ *                 description: Subtitle for the event
  *               description:
  *                 type: string
+ *                 description: Detailed description of the event
  *               rules:
  *                 type: string
+ *                 description: Rules and regulations for the event
  *               visibility:
- *                 type: string
+ *                 type: boolean
+ *                 description: Event visibility
  *               status:
  *                 type: string
+ *                 description: Event status
  *     responses:
  *       default:
  *         description: API response
@@ -165,7 +177,7 @@
  *       - in: path
  *         name: id
  *         required: true
- *         description: Event ID
+ *         description: Event unique ID
  *         schema:
  *           type: string
  *     responses:
@@ -206,31 +218,43 @@
  *             properties:
  *               title:
  *                 type: string
+ *                 description: Event title
  *               category:
  *                 type: string
+ *                 description: Category name
  *               start_date:
  *                 type: string
  *                 format: date
+ *                 description: Start date of the event
  *               end_date:
  *                 type: string
  *                 format: date
+ *                 description: End date of the event
  *               upload_limit:
  *                 type: integer
+ *                 description: File upload limit
  *               upload_size:
  *                 type: integer
+ *                 description: Maximum file size limit
  *               banner:
  *                 type: string
  *                 format: binary
+ *                 description: Event banner image
  *               subtitle:
  *                 type: string
+ *                 description: Subtitle for the event
  *               description:
  *                 type: string
+ *                 description: Description of the event
  *               rules:
  *                 type: string
+ *                 description: Rules and regulations for the event
  *               visibility:
- *                 type: string
+ *                 type: boolean
+ *                 description: Event visibility
  *               status:
  *                 type: string
+ *                 description: Event status
  *     responses:
  *       default:
  *         description: API response

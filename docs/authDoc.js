@@ -24,19 +24,25 @@
  *             properties:
  *               first_name:
  *                 type: string
+ *                 description: User's first name
  *               last_name:
  *                 type: string
+ *                 description: User's last name
  *               email:
  *                 type: string
  *                 format: email
+ *                 description: User's email address
  *               phone:
  *                 type: string
+ *                 description: User's phone number
  *               password:
  *                 type: string
  *                 format: password
+ *                 description: New password
  *               password_confirmation:
  *                 type: string
  *                 format: password
+ *                 description: Confirmation of the new password
  *     responses:
  *       default:
  *         description: API response
@@ -67,11 +73,14 @@
  *               email:
  *                 type: string
  *                 format: email
+ *                 description: User's email address
  *               username:
  *                 type: string
+ *                 description: User's username
  *               password:
  *                 type: string
  *                 format: password
+ *                 description: User's password
  *     responses:
  *       default:
  *         description: API response
