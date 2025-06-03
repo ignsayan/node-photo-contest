@@ -17,6 +17,20 @@ const options = {
                 url: `${process.env.APP_HOST}`,
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
+        security: [
+            {
+                bearerAuth: [],
+            },
+        ],
     },
     apis: [
         path.join(docPath, 'authDoc.js'),

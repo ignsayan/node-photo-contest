@@ -38,12 +38,8 @@
  *                 type: string
  *                 format: password
  *     responses:
- *       201:
- *         description: User registered successfully
- *       400:
- *         description: Validation error
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -77,12 +73,8 @@
  *                 type: string
  *                 format: password
  *     responses:
- *       200:
- *         description: Login successful
- *       400:
- *         description: Invalid credentials or missing field
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -109,12 +101,8 @@
  *                 format: email
  *                 description: User's email address to receive the password reset instructions
  *     responses:
- *       200:
- *         description: Password reset instructions sent
- *       400:
- *         description: Validation error or invalid email
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -155,12 +143,8 @@
  *                 format: password
  *                 description: Confirmation of the new password
  *     responses:
- *       200:
- *         description: Password reset successfully
- *       400:
- *         description: Validation error or invalid token
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -171,13 +155,9 @@
  *     description: Invalidates the user's authentication token and logs them out.
  *     tags:
  *       - Authentication
- *     security:
- *       - bearerAuth: []
  *     responses:
- *       200:
- *         description: Successfully logged out
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -201,14 +181,10 @@
  *             properties:
  *               attribute:
  *                 type: string
- *                 description: Phone number or email to send the OTP to
+ *                 description: Phone number or email to send the OTP
  *     responses:
- *       200:
- *         description: OTP sent successfully
- *       400:
- *         description: Validation error or missing attribute
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
 
 /**
@@ -238,10 +214,6 @@
  *                 type: string
  *                 description: Channel through which OTP was sent (e.g., phone, email)
  *     responses:
- *       200:
- *         description: OTP verified successfully
- *       400:
- *         description: Invalid OTP or request error
- *       401:
- *         description: Unauthorized
+ *       default:
+ *         description: API response
  */
