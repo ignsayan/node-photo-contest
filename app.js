@@ -1,6 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import websocket from './configs/socketio.js'
+import { websocket } from './configs/socketio.js'
 import dbconnect from './configs/database.js'
 import corspolicy from './configs/cors.js'
 import isAuthenticated from './app/middlewares/isAuthenticated.js'

@@ -3,6 +3,8 @@ import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
 import listEventsAction from '../../actions/admin/listEventsAction.js'
 import updateEventAction from '../../actions/admin/updateEventAction.js'
+import getAdminDashboard from '../../actions/admin/getAdminDashboard.js'
+import { getIoInstance } from '../../../configs/socketio.js'
 
 
 export const listEvents = responseHandler(async (req) => {
@@ -12,6 +14,9 @@ export const listEvents = responseHandler(async (req) => {
 
 export const createEvent = responseHandler(async (req) => {
     const event = await createEventAction(req);
+    const data = await getAdminDashboard();
+    const io = getIoInstance();
+    io.of('/admin/dashboard').emit('admin:dashboard', data);
     return {
         message: 'Event created successfully',
         data: { event }

@@ -2,15 +2,19 @@ import { Server } from 'socket.io'
 import http from 'http'
 import { policy } from './cors.js'
 
+let io;
+
 const websocket = (app) => {
-
     const server = http.createServer(app);
-
-    const io = new Server(server, {
+    io = new Server(server, {
         cors: policy,
     });
-
     return { server, io };
 }
 
-export default websocket
+const getIoInstance = () => {
+    if (!io) throw new Error('Socket.io not initialized');
+    return io;
+}
+
+export { websocket, getIoInstance }

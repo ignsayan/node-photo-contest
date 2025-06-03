@@ -1,8 +1,8 @@
 import { responseHandler } from '../../services/index.js'
-import getOverviewAction from '../../actions/admin/getOverviewAction.js'
+import getAdminDashboard from '../../actions/admin/getAdminDashboard.js'
 
 
 export const getOverview = responseHandler(async (req) => {
-    const data = await getOverviewAction();
+    const data = await getAdminDashboard();
     return { data };
 });
