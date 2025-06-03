@@ -30,7 +30,7 @@ const route = router();
 route.use(isVerifiedUser());
 
 // registered routes
-route.get('/overview',
+route.get('/dashboard',
     getOverview
 );
 route.get('/events',

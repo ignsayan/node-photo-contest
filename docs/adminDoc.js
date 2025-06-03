@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /api/admin/overview:
+ * /api/admin/dashboard:
  *   get:
  *     summary: Dashboard overview
  *     description: Retrieves overview statistics or data for the admin dashboard.

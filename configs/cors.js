@@ -3,7 +3,7 @@ import cors from 'cors'
 
 dotenv.config();
 
-const corspolicy = cors({
+export const policy = {
     origin: [
         'http://localhost:5090',
         process.env.APP_HOST,
@@ -11,7 +11,8 @@ const corspolicy = cors({
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-});
+}
 
+const corspolicy = cors(policy);
 
 export default corspolicy

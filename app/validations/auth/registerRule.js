@@ -27,7 +27,6 @@ const rule = [
         .trim()
         .optional({ checkFalsy: true })
         .isNumeric().withMessage('Phone must be a number').bail()
-        .isLength({ min: 10, max: 10 }).withMessage('Phone must be 10 digits').bail()
         .custom(async (value) => {
             const number = parsePhoneNumberFromString(value);
             if (!number || !number.isValid()) {
