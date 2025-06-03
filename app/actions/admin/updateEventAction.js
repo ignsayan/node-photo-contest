@@ -4,6 +4,7 @@ import Event from '../../models/Event.js'
 import { mediaUploader } from '../../services/index.js'
 import Media from '../../models/Media.js'
 import { MEDIA } from '../../../configs/constants.js'
+import redis from '../../../configs/redis.js'
 import cache from '../../../configs/cache.js'
 
 const action = async ({ params, body }) => {
@@ -39,7 +40,8 @@ const action = async ({ params, body }) => {
         });
     }
 
-    cache.del('contest');
+    process.env.APP_ENVIRONMENT === 'local'
+        ? cache.del('contest') : await redis.del('contest');
 
     return event;
 };
