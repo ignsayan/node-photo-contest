@@ -1,21 +1,10 @@
 import { MEDIA } from '../../../configs/constants.js'
 import Event from '../../models/Event.js'
 import Submission from '../../models/Submission.js'
-import redis from '../../../configs/redis.js'
-import cache from '../../../configs/cache.js'
 
 const action = async (data) => {
 
     const { id } = data;
-
-    if (process.env.APP_ENVIRONMENT === 'local') {
-        if (cache.has('contest')) {
-            return JSON.parse(cache.get('contest'));
-        }
-    } else {
-        const contest = await redis.get('contest');
-        if (contest) return JSON.parse(contest);
-    }
 
     const event = await Event.findById(id);
     if (!event) throw new Error('Event not found');
@@ -43,10 +32,6 @@ const action = async (data) => {
         'total_submissions': submissions.length,
         'user_uploads': media,
     };
-
-    process.env.APP_ENVIRONMENT === 'local'
-        ? cache.set('contest', JSON.stringify(contest))
-        : await redis.set('contest', JSON.stringify(contest));
 
     return contest;
 };
