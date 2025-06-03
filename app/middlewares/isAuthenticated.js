@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-// import redis from '../../configs/redis.js'
+import redis from '../../configs/redis.js'
 import cache from '../../configs/cache.js'
 
 const isAuthenticated = async (req, res, next) => {
@@ -13,8 +13,10 @@ const isAuthenticated = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // const blacklisted = await redis.get(`bl_${token}`);
-        const blacklisted = cache.get(`bl_${token}`);
+
+        const blacklisted = (process.env.APP_ENVIRONMENT === 'local')
+            ? cache.get(`bl_${token}`) : await redis.get(`bl_${token}`);
+
         if (blacklisted) {
             return res.status(401).json({ errors: 'Token blacklisted' });
         }
