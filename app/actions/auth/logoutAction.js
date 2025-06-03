@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
-import redis from '../../../configs/redis.js'
+// import redis from '../../../configs/redis.js'
+import cache from '../../../configs/cache.js'
 
 const action = async (data) => {
 
@@ -11,8 +12,9 @@ const action = async (data) => {
 
     const timeToLive = expiryTime - currentTime;
 
-    if (timeToLive > 0 && process.env.APP_ENVIRONMENT !== 'local') {
-        await redis.setex(`bl_${token}`, timeToLive, 'blacklisted');
+    if (timeToLive > 0) {
+        // await redis.setex(`bl_${token}`, timeToLive, 'blacklisted');
+        cache.set(`bl_${token}`, 'blacklisted', timeToLive);
     };
 };
 
