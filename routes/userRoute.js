@@ -9,6 +9,7 @@ import {
     eventDetails,
     createSubmission,
     listSubmissions,
+    deleteSubmission,
 } from '../app/controllers/user/submissionController.js'
 
 // validation rules
@@ -45,6 +46,10 @@ route.post('/submission/create',
 );
 route.get('/submissions',
     listSubmissions
+);
+route.delete('/submission/:id',
+    throttle(60, 60),
+    deleteSubmission
 );
 
 export default route

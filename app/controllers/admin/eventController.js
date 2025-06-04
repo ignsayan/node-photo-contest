@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import Event from '../../models/Event.js'
 import createEventAction from '../../actions/admin/createEventAction.js'
 import listEventsAction from '../../actions/admin/listEventsAction.js'

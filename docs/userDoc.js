@@ -113,3 +113,23 @@
  *       default:
  *         description: API response
  */
+
+/**
+ * @swagger
+ * /api/user/submission/{id}:
+ *   delete:
+ *     summary: Delete a user submission
+ *     tags:
+ *       - User Submissions
+ *     description: Allows the authenticated user to delete their own submission by ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the submission to delete
+ *     responses:
+ *       default:
+ *         description: Success or error response
+ */

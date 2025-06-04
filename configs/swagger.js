@@ -33,9 +33,7 @@ const options = {
         ],
     },
     apis: [
-        path.join(docPath, 'authDoc.js'),
-        path.join(docPath, 'adminDoc.js'),
-        path.join(docPath, 'userDoc.js'),
+        path.join(docPath, '*.js'),
     ],
 };
 

@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import getAdminStatsAction from '../../actions/admin/getAdminStatsAction.js'
 
 

@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import forgotPasswordAction from '../../actions/auth/forgotPasswordAction.js'
 import resetPasswordAction from '../../actions/auth/resetPasswordAction.js'
 

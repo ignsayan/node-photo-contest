@@ -1,7 +1,7 @@
 import slugify from 'slugify'
 import Category from '../../models/Category.js'
 import Event from '../../models/Event.js'
-import { mediaUploader } from '../../services/index.js'
+import mediaHandler from '../../services/mediaHandler.js'
 import { MEDIA } from '../../../configs/constants.js'
 
 const action = async ({ user, body }) => {
@@ -23,8 +23,9 @@ const action = async ({ user, body }) => {
     });
 
     if (event && files) {
-        await mediaUploader({
+        await mediaHandler.upload({
             buffer: files[0].buffer,
+            folder: MEDIA.TYPE.BANNER,
             refId: event._id,
             refModel: Event.modelName,
             type: MEDIA.TYPE.BANNER,

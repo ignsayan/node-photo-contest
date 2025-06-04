@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import Category from '../../models/Category.js'
 import listCategoriesAction from '../../actions/admin/listCategoriesAction.js'
 

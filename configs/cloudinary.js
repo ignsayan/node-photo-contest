@@ -10,6 +10,4 @@ cloudinary.config({
     secure: true,
 });
 
-const uploader = cloudinary.uploader;
-
-export default uploader
+export default cloudinary

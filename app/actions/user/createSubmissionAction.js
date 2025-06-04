@@ -1,5 +1,5 @@
 import Submission from '../../models/Submission.js'
-import { mediaUploader } from '../../services/index.js'
+import mediaHandler from '../../services/mediaHandler.js'
 import { MEDIA } from '../../../configs/constants.js'
 
 const action = async ({ user, body }) => {
@@ -17,8 +17,9 @@ const action = async ({ user, body }) => {
 
         for (const file of files) {
 
-            const media = await mediaUploader({
+            const media = await mediaHandler.upload({
                 buffer: file.buffer,
+                folder: MEDIA.TYPE.USER_UPLOADS,
                 refId: submission._id,
                 refModel: Submission.modelName,
                 type: MEDIA.TYPE.USER_UPLOADS,

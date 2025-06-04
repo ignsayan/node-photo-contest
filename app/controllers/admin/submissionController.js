@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import getSubmissionsAction from '../../actions/admin/getSubmissionsAction.js'
 
 

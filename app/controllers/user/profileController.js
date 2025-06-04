@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import User from '../../models/User.js'
 import Event from '../../models/Event.js'
 

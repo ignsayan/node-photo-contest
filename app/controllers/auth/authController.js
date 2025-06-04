@@ -1,4 +1,4 @@
-import { responseHandler } from '../../services/index.js'
+import responseHandler from '../../services/responseHandler.js'
 import registerAction from '../../actions/auth/registerAction.js'
 import loginAction from '../../actions/auth/loginAction.js'
 import logoutAction from '../../actions/auth/logoutAction.js'

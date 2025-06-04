@@ -1,4 +1,4 @@
-import { createAndStoreOtp } from '../../services/index.js'
+import createAndStoreOtp from '../../services/createAndStoreOtp.js'
 import twilioclient from '../../../configs/twilio.js'
 
 const phoneVerification = (schema) => {
