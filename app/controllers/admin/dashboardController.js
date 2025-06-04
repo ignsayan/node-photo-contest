@@ -1,8 +1,8 @@
 import { responseHandler } from '../../services/index.js'
-import getAdminDashboard from '../../actions/admin/getAdminDashboard.js'
+import getAdminStatsAction from '../../actions/admin/getAdminStatsAction.js'
 
 
 export const getOverview = responseHandler(async (req) => {
-    const data = await getAdminDashboard();
+    const data = await getAdminStatsAction();
     return { data };
 });

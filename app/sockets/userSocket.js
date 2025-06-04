@@ -1,8 +1,8 @@
 export const userSocket = (io) => {
 
-    io.of('/user/dashboard').on('connection', async (socket) => {
+    io.of('/user/stats').on('connection', async (socket) => {
         const data = {};
-        socket.emit('user:dashboard', data);
+        socket.emit('user:stats', data);
         socket.on('disconnect', () => socket.disconnect(true));
     });
 };

@@ -1,10 +1,10 @@
-import getAdminDashboard from '../actions/admin/getAdminDashboard.js'
+import getAdminStatsAction from '../actions/admin/getAdminStatsAction.js'
 
 export const adminSocket = (io) => {
 
-    io.of('/admin/dashboard').on('connection', async (socket) => {
-        const data = await getAdminDashboard();
-        socket.emit('admin:dashboard', data);
+    io.of('/admin/stats').on('connection', async (socket) => {
+        const data = await getAdminStatsAction();
+        socket.emit('admin:stats', data);
         socket.on('disconnect', () => socket.disconnect(true));
     });
 };
