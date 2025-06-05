@@ -24,6 +24,7 @@ app.use(corspolicy);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/ping', (req, res) => res.send('pong'));
 app.use('/cron', schedularRoute); // cron jobs
 
 // guest routes
