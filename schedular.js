@@ -1,8 +1,7 @@
 import cron from 'node-cron'
 import Event from './app/models/Event.js'
 
-// every day at midnight
-cron.schedule('0 0 * * *', async () => {
+cron.schedule('* */10 * * *', async () => {
     const today = new Date();
     await Event.updateMany(
         {
