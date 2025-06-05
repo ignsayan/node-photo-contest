@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import { websocket } from './configs/socketio.js'
 import dbconnect from './configs/database.js'
 import corspolicy from './configs/cors.js'
-import './schedular.js'
+// import './schedular.js'
 import isAuthenticated from './app/middlewares/isAuthenticated.js'
 import hasRole from './app/middlewares/hasRole.js'
 import authRoute from './routes/authRoute.js'
@@ -12,6 +12,7 @@ import userRoute from './routes/userRoute.js'
 import webRoute from './routes/webRoute.js'
 import adminSocket from './app/sockets/adminSocket.js'
 import userSocket from './app/sockets/userSocket.js'
+import Event from './app/models/Event.js'
 
 dotenv.config();
 await dbconnect();
@@ -24,7 +25,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // keep connection alive
-app.get('/bubu', (req, res) => res.send('dudu'));
+app.get('/cron', async (req, res) => {
+    const today = new Date();
+    await Event.updateMany(
+        {
+            status: 'active',
+            end_date: { $lte: today }
+        },
+        {
+            $set: { status: 'ended' }
+        }
+    );
+});
+
 
 // guest routes
 app.use('/', webRoute);
